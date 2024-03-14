@@ -4,10 +4,11 @@ import com.example.europrofile.data.AuthRepositoryImpl
 import com.example.europrofile.domain.AuthRepository
 import dagger.Binds
 import dagger.Module
-import dagger.hilt.migration.DisableInstallInCheck
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
+@InstallIn(SingletonComponent::class)
 @Module
-@DisableInstallInCheck
 abstract class Module {
 
     @Binds

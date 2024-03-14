@@ -20,7 +20,6 @@ abstract class BaseViewModel: ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             _authState.postValue(AuthResult.Loading)
-            sendRequest(email, password)
             val result = sendRequest.invoke(email, password)
             _authState.postValue(result)
         }
