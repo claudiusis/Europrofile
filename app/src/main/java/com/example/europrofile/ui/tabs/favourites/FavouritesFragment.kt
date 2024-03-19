@@ -1,4 +1,4 @@
-package com.example.europrofile.ui.main
+package com.example.europrofile.ui.tabs.favourites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.europrofile.R
 
-class MainPage : Fragment() {
+
+class FavouritesFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main_page, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_favourites, container, false)
     }
 
 }

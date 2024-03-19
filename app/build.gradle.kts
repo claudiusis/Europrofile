@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.europrofile"
-        minSdk = 27
+        minSdk = 29
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -72,6 +72,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
 
+    implementation("com.makeramen:roundedimageview:2.3.0")
 }
 
 

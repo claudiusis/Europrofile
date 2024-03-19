@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.Europrofile" parent="Base.Theme.Europrofile" />
+
+    <style name="NavBar" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@android:color/transparent</item>
+
+    </style>
+
 </resources>

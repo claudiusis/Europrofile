@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.europrofile.R
 import com.example.europrofile.core.ui.BaseFragment
 import com.example.europrofile.data.AuthResult
 import com.example.europrofile.databinding.FragmentRegistrBinding
@@ -29,7 +27,7 @@ class RegisterFragment : BaseFragment<FragmentRegistrBinding>() {
         viewModel.authState.observe(viewLifecycleOwner){
             when(it){
                 AuthResult.Loading -> binding.loading.visibility = View.VISIBLE
-                is AuthResult.Success -> findNavController().navigate(R.id.action_registerFragment_to_mainPage)
+                is AuthResult.Success ->"" // findNavController().navigate(R.id.action_registerFragment_to_mainPage)
                 is AuthResult.Error -> binding.loading.visibility = View.GONE
             }
         }
@@ -46,7 +44,7 @@ class RegisterFragment : BaseFragment<FragmentRegistrBinding>() {
         }
 
         binding.linkToAuth.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            //findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
 }

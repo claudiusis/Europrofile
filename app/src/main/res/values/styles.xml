@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Navigate" parent="Theme.MaterialComponents">
+        <item name="colorPrimary">#0D6EFD</item>
+        <item name="colorPrimaryVariant">#0D6EFD</item>
+        <item name="colorOnPrimary">#707B81</item>
+    </style>
+
+    <style name="button" parent="TextAppearance.AppCompat.Button">
+        <item name="android:background">#0D6EFD</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="FAB">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="backgroundTint">@color/blue</item>
+    </style>
+
+    <style name="mainPageTitles">
+        <item name="fontFamily">@font/raleway_bold</item>
+    </style>
+
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

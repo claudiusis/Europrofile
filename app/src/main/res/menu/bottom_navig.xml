@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/info_fragment_graph"
+        android:icon="@drawable/home_icon"
+        android:title="" />
+
+    <item
+        android:id="@+id/comments_fragment_graph"
+        android:icon="@drawable/comments_icon"
+        android:title="" />
+
+    <item
+        android:id="@+id/add_fragment_graph"
+        android:title="" />
+
+    <item
+        android:id="@+id/favour_fragment_graph"
+        android:icon="@drawable/favourite_icon"
+        android:title="" />
+
+    <item
+        android:id="@+id/account_fragment_graph"
+        android:icon="@drawable/account_icon"
+        android:title="" />
+
+</menu>
