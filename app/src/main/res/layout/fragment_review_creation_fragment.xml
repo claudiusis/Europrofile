@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/light_gray"
+    tools:context=".ui.reviewcreation.ReviewCreationFragment">
+
+    <TextView
+        android:id="@+id/review_creation_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Поделитесь впечатлениями"
+        android:fontFamily="@font/raleway_bold"
+        android:textSize="24dp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/comment_edit_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_bold"
+        android:text="Комментарий"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_creation_title" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/review_creation_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/account_recycler"
+        android:gravity="top"
+        android:hint="Если не знаете, что написать - обратите внимание на подсказки ниже"
+        android:inputType="textMultiLine"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:minLines="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comment_edit_title"/>
+
+    <TextView
+        android:id="@+id/review_creation_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_creation_input"
+        android:background="@drawable/account_recycler"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:textSize="16dp"
+        android:text="Обслуживание • Персонал\n Качество установки"/>
+
+    <TextView
+        android:id="@+id/add_img_creation_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавьте фотографии"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_creation_hint"
+        android:layout_margin="16dp"
+        android:textSize="20dp"
+        android:fontFamily="@font/raleway_bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:gravity="start|center"
+        app:layout_constraintTop_toBottomOf="@id/add_img_creation_title"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_addition_review_creator_rv"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/add_img_creation_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/add_icon_shape"
+            android:padding="16dp"
+            android:src="@drawable/add_img"
+            android:contentDescription="additionImg" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/roundedcontainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/buttons"
+            android:text="Оставиь отзыв"
+            android:textSize="18dp"
+            android:fontFamily="@font/raleway_medium"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textAlignment="center"
+            android:textColor="#C7C7C7"
+            android:text="Проверьте отзыв перед отправкой: потм его нельзя будет поменять"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

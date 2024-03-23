@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.R
@@ -19,6 +20,10 @@ class ParentAdapter(val list: List<ParentItem>) : RecyclerView.Adapter<ParentAda
             recycler.layoutManager = LinearLayoutManager(itemView.context)
             val adapter = ChildAdapter(item.settingList)
             recycler.adapter = adapter
+
+            val itemDecorator = MyDecorator()
+            itemDecorator.setDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.divide_line)!!)
+            recycler.addItemDecoration(itemDecorator)
         }
     }
 

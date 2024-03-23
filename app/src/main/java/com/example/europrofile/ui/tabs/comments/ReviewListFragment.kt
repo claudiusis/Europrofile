@@ -5,16 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.europrofile.R
+import androidx.recyclerview.widget.RecyclerView
+import com.example.europrofile.databinding.FragmentReviewListBinding
 
 class ReviewListFragment : Fragment() {
+
+    private lateinit var binding: FragmentReviewListBinding
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_review_list, container, false)
+        binding = FragmentReviewListBinding.inflate(layoutInflater)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        recyclerView = binding.reviewRv
+
+    }
 }

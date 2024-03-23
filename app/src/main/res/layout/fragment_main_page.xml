@@ -40,17 +40,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <androidx.appcompat.widget.SearchView
+    <SearchView
         android:id="@+id/searcher"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="20dp"
         android:autofillHints=""
-        android:background="@drawable/search_input"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/input"
         app:queryBackground="@android:color/transparent"
-        app:queryHint="Найти товар"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Найти товар"
         app:iconifiedByDefault="false"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,71 +114,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/news_pager" />
 
-    <HorizontalScrollView
-        android:id="@+id/scroll"
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="ScrollViewCount"
-        android:layout_marginStart="20sp"
-        android:layout_marginEnd="30sp"
+        android:layout_margin="8dp"
+        app:tabBackground="@drawable/tab_selector"
+        android:backgroundTint="@android:color/transparent"
+        app:tabIndicator="@null"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/category_title">
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:layout_marginTop="16dp"
-        android:id="@+id/toggleButton"
-        android:showDividers="middle"
-        android:layout_width="match_parent"
-        android:divider="@drawable/divider"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20sp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/category_title"
-        app:selectionRequired="true"
-        app:singleSelection="true">
+            <com.google.android.material.tabs.TabItem
+                android:text="Все товары"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.tabs.TabItem
+                android:text="Окна"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.tabs.TabItem
+                android:text="Кондиционеры"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:text="Все товары"
-            android:textAlignment="center"
-            android:textColor="@drawable/single_choose_buttons"
-            app:backgroundTint="@color/white"
-            android:padding="16dp"
-            android:id="@+id/all_inf_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/cond_btn"
-            android:text="Окна"
-            android:textColor="@drawable/single_choose_buttons"
-            app:backgroundTint="@color/white"
-            android:padding="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/window_btn"
-            android:text="Кондиционеры"
-            android:textColor="@drawable/single_choose_buttons"
-            app:backgroundTint="@color/white"
-            android:padding="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/sheathing_btn"
-            android:text="Обшивка"
-            android:textColor="@drawable/single_choose_buttons"
-            app:backgroundTint="@color/white"
-            android:padding="16dp"
-            android:layout_marginEnd="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-    </HorizontalScrollView>
+    </com.google.android.material.tabs.TabLayout>
 
     <LinearLayout
         android:id="@+id/condLayout"
@@ -184,7 +149,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/scroll"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView

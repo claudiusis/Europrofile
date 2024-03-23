@@ -38,26 +38,6 @@ class MainPage : Fragment() {
 
         viewPager2.adapter = newsAdapter
 
-        val lisOfButton =
-            listOf(binding.allInfBtn, binding.condBtn, binding.sheathingBtn, binding.windowBtn)
-
-        binding.toggleButton.addOnButtonCheckedListener { materialButtonToggleGroup, id, isChecked ->
-            if (isChecked) {
-                lisOfButton.forEach { it.setBackgroundColor(resources.getColor(R.color.white)) }
-                when (id) {
-                    R.id.all_inf_btn -> binding.allInfBtn.setBackgroundColor(resources.getColor(R.color.blue))
-                    R.id.cond_btn -> binding.condBtn.setBackgroundColor(resources.getColor(R.color.blue))
-                    R.id.window_btn -> binding.windowBtn.setBackgroundColor(resources.getColor(R.color.blue))
-                    R.id.sheathing_btn -> binding.sheathingBtn.setBackgroundColor(
-                        resources.getColor(
-                            R.color.blue
-                        )
-                    )
-                }
-            }
-        }
-        binding.allInfBtn.isChecked = true
-
         viewPager2 = binding.workExamples
         exampleAdapter = ExamplesAdapter(makeExamples())
 
