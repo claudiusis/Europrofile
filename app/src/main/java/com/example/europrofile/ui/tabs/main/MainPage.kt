@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.example.europrofile.R
 import com.example.europrofile.databinding.FragmentMainPageBinding
 import com.example.europrofile.ui.tabs.main.newsrecycler.ExamplesAdapter
 import com.example.europrofile.ui.tabs.main.newsrecycler.Image
@@ -19,7 +18,6 @@ class MainPage : Fragment() {
     private lateinit var viewPager2: ViewPager2
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var newsList: ArrayList<Image>
-    private lateinit var exampleList: ArrayList<Image>
     private lateinit var exampleAdapter: ExamplesAdapter
 
     override fun onCreateView(
@@ -39,29 +37,19 @@ class MainPage : Fragment() {
         viewPager2.adapter = newsAdapter
 
         viewPager2 = binding.workExamples
-        exampleAdapter = ExamplesAdapter(makeExamples())
+        exampleAdapter = ExamplesAdapter()
 
         viewPager2.adapter = exampleAdapter
-
     }
+
 
     private fun makeNews(): MutableList<Image> {
-        newsList = ArrayList<Image>()
-        newsList.add(Image(R.drawable.img_2))
-        newsList.add(Image(R.drawable.img_3))
-        newsList.add(Image(R.drawable.img_4))
-        newsList.add(Image(R.drawable.img_5))
+        newsList = ArrayList()
+        newsList.add(Image("https://firebasestorage.googleapis.com/v0/b/europrofile-b9677.appspot.com/o/img_2.png?alt=media&token=e78f36f9-bb8a-4bb5-9d8c-83aef320a159"))
+        newsList.add(Image("https://firebasestorage.googleapis.com/v0/b/europrofile-b9677.appspot.com/o/img_3.png?alt=media&token=012cc6bf-888d-45ad-8095-2f675ba08f07"))
+        newsList.add(Image("https://firebasestorage.googleapis.com/v0/b/europrofile-b9677.appspot.com/o/img_4.png?alt=media&token=29b19c69-c84b-4ded-bf13-0113754cb65b"))
+        newsList.add(Image("https://firebasestorage.googleapis.com/v0/b/europrofile-b9677.appspot.com/o/img_5.png?alt=media&token=7b0a45ff-dfd6-46ed-a0ef-56959a04144a"))
         return newsList
-    }
-
-    private fun makeExamples(): List<Image> {
-        exampleList = ArrayList<Image>()
-        exampleList.add(Image(R.drawable.ex_1))
-        exampleList.add(Image(R.drawable.ex_2))
-        exampleList.add(Image(R.drawable.ex_3))
-        exampleList.add(Image(R.drawable.ex_4))
-        exampleList.add(Image(R.drawable.ex_5))
-        return exampleList
     }
 
 }

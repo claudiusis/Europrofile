@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.accountpages.profile.ProfileFragment">
+
+    <TextView
+        android:id="@+id/profile_title"
+        android:text="Профиль"
+        style="@style/textTitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/profile_img"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="32dp"
+        app:riv_corner_radius="60dp"
+        android:src="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_title"/>
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:text="Имя Фамилия"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_img" />
+
+    <TextView
+        android:id="@+id/profile_refactorLink"
+        android:text="Редактировать профиль"
+        android:textSize="12sp"
+        android:textColor="@color/blue"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_name"/>
+
+    <TextView
+        android:id="@+id/profile_info_title1"
+        android:text="Номер телефона"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="16sp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_refactorLink"/>
+
+    <TextView
+        android:id="@+id/profile_info1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input"
+        android:fontFamily="@font/poppins"
+        android:padding="17dp"
+        android:text="+7 (999) 66-88"
+        android:textColor="#2B2B2B"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info_title1"/>
+
+    <TextView
+        android:id="@+id/profile_info_title2"
+        android:text="Почта"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="16sp"
+        android:layout_marginTop="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info1"/>
+
+    <TextView
+        android:id="@+id/profile_info2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input"
+        android:fontFamily="@font/poppins"
+        android:padding="17dp"
+        android:text="example@mail.ru"
+        android:textColor="#2B2B2B"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info_title2"/>
+
+    <TextView
+        android:id="@+id/profile_info_title3"
+        android:text="Адрес"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="16sp"
+        android:layout_marginTop="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info2"/>
+
+    <TextView
+        android:id="@+id/profile_info3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input"
+        android:fontFamily="@font/poppins"
+        android:padding="17dp"
+        android:text="Москва"
+        android:textColor="#2B2B2B"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info_title3"/>
+
+    <TextView
+        android:id="@+id/profile_info_title4"
+        android:text="Пароль"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info3"/>
+
+    <TextView
+        android:id="@+id/profile_info4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input"
+        android:fontFamily="@font/poppins"
+        android:padding="17dp"
+        android:text="••••••••••••"
+        android:textColor="#2B2B2B"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info_title4"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

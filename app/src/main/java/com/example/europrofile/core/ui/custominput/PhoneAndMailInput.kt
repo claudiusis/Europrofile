@@ -1,4 +1,4 @@
-package com.example.europrofile.ui.authentication.custominput
+package com.example.europrofile.core.ui.custominput
 
 import android.content.Context
 import android.util.AttributeSet

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/test_navig"
-    app:startDestination="@id/tabsFragment">
+    app:startDestination="@id/profileFragment2">
     <fragment
         android:id="@+id/tabsFragment"
         android:name="com.example.europrofile.ui.tabs.TabsFragment"
@@ -19,4 +19,9 @@
         android:name="com.example.europrofile.ui.tabs.addorder.MakeOrderFragment"
         android:label="fragment_make_order"
         tools:layout="@layout/fragment_make_order" />
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.example.europrofile.ui.accountpages.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

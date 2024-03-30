@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.europrofile.core.ui.BaseFragment
-import com.example.europrofile.data.AuthResult
+import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentRegistrBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,9 +26,9 @@ class RegisterFragment : BaseFragment<FragmentRegistrBinding>() {
 
         viewModel.authState.observe(viewLifecycleOwner){
             when(it){
-                AuthResult.Loading -> binding.loading.visibility = View.VISIBLE
-                is AuthResult.Success ->"" // findNavController().navigate(R.id.action_registerFragment_to_mainPage)
-                is AuthResult.Error -> binding.loading.visibility = View.GONE
+                RequestResult.Loading -> binding.loading.visibility = View.VISIBLE
+                is RequestResult.Success ->"" // findNavController().navigate(R.id.action_registerFragment_to_mainPage)
+                is RequestResult.Error -> binding.loading.visibility = View.GONE
             }
         }
 

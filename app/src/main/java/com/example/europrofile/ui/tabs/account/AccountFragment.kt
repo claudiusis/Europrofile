@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.R
@@ -37,15 +38,18 @@ class AccountFragment : Fragment() {
 
         addItems()
 
-        val adapter = ParentAdapter(recyclerList)
+        val adapter = ParentAdapter({
+                title  ->
+            when (title) {
+                "Написать отзыв" -> findNavController().navigate(R.id.action_accountFragment_to_reviewCreationFragment)
+            }
+        }, recyclerList)
         recycler.adapter = adapter
-
     }
 
     private fun addItems(){
         recyclerList.clear()
         val settingsList = ArrayList<ChildItem>()
-        settingsList.add(ChildItem("Профиль", R.drawable.baseline_arrow_forward_ios_24))
         settingsList.add(ChildItem("Записи на замер", R.drawable.baseline_arrow_forward_ios_24))
         settingsList.add(ChildItem("Написать отзыв", R.drawable.baseline_arrow_forward_ios_24))
         settingsList.add(ChildItem("мои отзывы", R.drawable.baseline_arrow_forward_ios_24))

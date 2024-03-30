@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.R
 
-class ParentAdapter(val list: List<ParentItem>) : RecyclerView.Adapter<ParentAdapter.ParentVH>() {
+class ParentAdapter(private val listener: (text:String)->Unit, val list: List<ParentItem>) : RecyclerView.Adapter<ParentAdapter.ParentVH>() {
+
+    lateinit var childAdapter: ChildAdapter
 
     inner class ParentVH(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val title = itemView.findViewById<TextView>(R.id.header_title)
@@ -18,12 +20,12 @@ class ParentAdapter(val list: List<ParentItem>) : RecyclerView.Adapter<ParentAda
         fun onBind(item: ParentItem){
             title.text = item.title
             recycler.layoutManager = LinearLayoutManager(itemView.context)
-            val adapter = ChildAdapter(item.settingList)
-            recycler.adapter = adapter
-
+            childAdapter = ChildAdapter(listener, item.settingList)
+            recycler.adapter = childAdapter
             val itemDecorator = MyDecorator()
             itemDecorator.setDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.divide_line)!!)
             recycler.addItemDecoration(itemDecorator)
+
         }
     }
 

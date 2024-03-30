@@ -5,16 +5,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.example.europrofile.R
 import com.makeramen.roundedimageview.RoundedImageView
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.Runnable
+import kotlinx.coroutines.launch
 
-class NewsAdapter(val list : MutableList<Image>, val viewPager2: ViewPager2): RecyclerView.Adapter<NewsAdapter.NewsVH>() {
+class NewsAdapter(val list : MutableList<Image>, private val viewPager2: ViewPager2): RecyclerView.Adapter<NewsAdapter.NewsVH>() {
 
     inner class NewsVH(view: View) : RecyclerView.ViewHolder(view) {
         private val image: RoundedImageView = view.findViewById(R.id.imageView)
         fun onBind(item: Image) {
-            image.setImageResource(item.image)
+            Glide.with(itemView.context)
+                .load(item.image)
+                .placeholder(R.color.blue)
+                .error(R.color.nav_color)
+                .into(image)
         }
     }
 
@@ -29,7 +36,20 @@ class NewsAdapter(val list : MutableList<Image>, val viewPager2: ViewPager2): Re
         holder.onBind(list[position])
 
         if (position == list.size - 2) {
-            viewPager2.post(runnable)
+            infinity(list)
+        }
+    }
+
+
+    private fun infinity(list: MutableList<Image>) {
+
+
+
+         //   list.addAll(list)
+          //  notifyItemInserted(list.size)
+        MainScope().launch {
+            list.addAll(list)
+            notifyDataSetChanged()
         }
     }
 

@@ -27,4 +27,10 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="textTitleStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/raleway_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
 </resources>

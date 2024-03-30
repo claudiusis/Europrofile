@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_gray"
-    tools:context=".ui.reviewcreation.ReviewCreationFragment">
+    tools:context=".ui.accountpages.reviewcreation.ReviewCreationFragment">
 
     <TextView
         android:id="@+id/review_creation_title"
@@ -45,6 +45,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/comment_edit_title"/>
 
+    <ImageButton
+        android:id="@+id/add_img_creation_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/add_icon_shape"
+        android:contentDescription="additionImg"
+        android:padding="16dp"
+        android:src="@drawable/add_img"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toEndOf="@id/image_addition_review_creator_rv"
+        app:layout_constraintTop_toTopOf="@id/image_addition_review_creator_rv"
+        app:layout_constraintBottom_toBottomOf="@id/image_addition_review_creator_rv"/>
+
     <TextView
         android:id="@+id/review_creation_hint"
         android:layout_width="match_parent"
@@ -64,54 +77,41 @@
         android:text="Добавьте фотографии"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/review_creation_hint"
+        app:layout_constraintBottom_toTopOf="@id/add_img_creation_title"
         android:layout_margin="16dp"
         android:textSize="20dp"
         android:fontFamily="@font/raleway_bold"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/image_addition_review_creator_rv"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:gravity="start|center"
-        app:layout_constraintTop_toBottomOf="@id/add_img_creation_title"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/image_addition_review_creator_rv"
-            android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginEnd="16dp"
-            android:layout_height="wrap_content"/>
-
-        <ImageButton
-            android:id="@+id/add_img_creation_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/add_icon_shape"
-            android:padding="16dp"
-            android:src="@drawable/add_img"
-            android:contentDescription="additionImg" />
-
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_img_creation_title"/>
 
     <LinearLayout
         android:background="@drawable/roundedcontainer"
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/image_addition_review_creator_rv">
 
         <Button
+            android:id="@+id/finish_review_creation"
             android:layout_width="match_parent"
             android:layout_margin="16dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/buttons"
             android:text="Оставиь отзыв"
             android:textSize="18dp"
+            app:backgroundTint="@color/blue"
+            android:background="@drawable/buttons"
             android:fontFamily="@font/raleway_medium"/>
 
         <TextView

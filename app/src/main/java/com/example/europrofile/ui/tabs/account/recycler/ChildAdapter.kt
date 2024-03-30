@@ -8,22 +8,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.R
 
-class ChildAdapter(val childList: List<ChildItem>): RecyclerView.Adapter<ChildAdapter.ChildVH>() {
+class ChildAdapter(private val gotoPage: (title: String)->Unit, val childList: List<ChildItem>): RecyclerView.Adapter<ChildAdapter.ChildVH>() {
 
     inner class ChildVH(item: View) : RecyclerView.ViewHolder(item){
         private val root = item.rootView
         private val title = item.findViewById<TextView>(R.id.setting_title)
         private val arrow = item.findViewById<ImageView>(R.id.arrow_img)
 
-        lateinit var gotoPage : ()->Unit
 
         fun onBind(item: ChildItem){
             title.text = item.title
             arrow.setImageResource(item.img)
-
-            root.setOnClickListener {
-                gotoPage.invoke()
-            }
         }
     }
 
@@ -37,5 +32,8 @@ class ChildAdapter(val childList: List<ChildItem>): RecyclerView.Adapter<ChildAd
     override fun onBindViewHolder(holder: ChildVH, position: Int) {
         holder.onBind(childList[position])
 
+        holder.itemView.setOnClickListener {
+            gotoPage(childList[position].title)
+        }
     }
 }

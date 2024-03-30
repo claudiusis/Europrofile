@@ -7,7 +7,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.R
 
-class ReviewImgAdapter(val imgList: ArrayList<ReviewImg>): RecyclerView.Adapter<ReviewImgAdapter.ReviewImgVH>() {
+class ReviewImgAdapter(private val imgList: ArrayList<ReviewImg>): RecyclerView.Adapter<ReviewImgAdapter.ReviewImgVH>() {
+
+    fun addImg(img: ReviewImg){
+        imgList.add(img)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewImgAdapter.ReviewImgVH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.reviewimages_vh, parent, false)
