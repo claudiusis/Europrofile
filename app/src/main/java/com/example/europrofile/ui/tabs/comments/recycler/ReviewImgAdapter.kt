@@ -11,7 +11,8 @@ class ReviewImgAdapter(private val imgList: ArrayList<ReviewImg>): RecyclerView.
 
     fun addImg(img: ReviewImg){
         imgList.add(img)
-        notifyDataSetChanged()
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewImgAdapter.ReviewImgVH {
@@ -26,6 +27,6 @@ class ReviewImgAdapter(private val imgList: ArrayList<ReviewImg>): RecyclerView.
     override fun getItemCount(): Int = imgList.size
 
     inner class ReviewImgVH(view: View): RecyclerView.ViewHolder(view){
-        val img = view.findViewById<ImageView>(R.id.reviewImg)
+        val img: ImageView = view.findViewById<ImageView>(R.id.review_image)
     }
 }

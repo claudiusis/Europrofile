@@ -8,18 +8,18 @@
         tools:context=".ui.tabs.TabsFragment"
         android:background="@color/light_gray">
 
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_tabs_container"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
         android:background="@color/light_gray"
+        app:defaultNavHost="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:navGraph="@navigation/tabs_navigation_graph"/>
+        app:navGraph="@navigation/tabs_navigation_graph" />
 
-
-        <com.google.android.material.bottomappbar.BottomAppBar
+    <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

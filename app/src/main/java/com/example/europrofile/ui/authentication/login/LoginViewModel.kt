@@ -9,8 +9,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val authRepository: AuthRepository)  : BaseViewModel() {
-
-    override val sendRequest: suspend (String, String) -> RequestResult<User> = {
-        email, password -> authRepository.signInWithEmailPassword(email, password)
-    }
+    override suspend fun sendRequest(vararg args: String): RequestResult<User> = authRepository.signInWithEmailPassword(args[0], args[1])
 }

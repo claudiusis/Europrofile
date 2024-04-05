@@ -12,7 +12,8 @@ class PasswordInput @JvmOverloads constructor(
     override val errorMessageId: Int = R.string.invalid_password
 
     override fun innerIsValid(): Boolean {
-        return text().matches(Regex(PASSWORD_PATTERN))
+        return true
+//        return text().matches(Regex(PASSWORD_PATTERN))
     }
 
     companion object {

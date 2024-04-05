@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/test_navig"
-    app:startDestination="@id/profileFragment2">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/tabsFragment"
         android:name="com.example.europrofile.ui.tabs.TabsFragment"
@@ -20,8 +20,27 @@
         android:label="fragment_make_order"
         tools:layout="@layout/fragment_make_order" />
     <fragment
-        android:id="@+id/profileFragment2"
-        android:name="com.example.europrofile.ui.accountpages.profile.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/loginFragment"
+        android:name="com.example.europrofile.ui.authentication.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_tabsFragment"
+            app:destination="@id/tabsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.europrofile.ui.authentication.registr.RegisterFragment"
+        android:label="fragment_registr"
+        tools:layout="@layout/fragment_registr" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_tabsFragment"
+            app:destination="@id/tabsFragment" />
+    </fragment>
 </navigation>

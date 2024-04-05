@@ -95,7 +95,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/news_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,10 +119,14 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:tabBackground="@drawable/tab_selector"
-        android:backgroundTint="@android:color/transparent"
+        android:background="@android:color/transparent"
         app:tabIndicator="@null"
+        app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/white"
         app:tabTextColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,17 +135,56 @@
             <com.google.android.material.tabs.TabItem
                 android:text="Все товары"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
             <com.google.android.material.tabs.TabItem
                 android:text="Окна"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
             <com.google.android.material.tabs.TabItem
                 android:text="Кондиционеры"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
+        <com.google.android.material.tabs.TabItem
+            android:text="Обшивка"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
 
     </com.google.android.material.tabs.TabLayout>
+
+    <LinearLayout
+        android:id="@+id/windLayout"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/mainPageTitles"
+            android:textSize="20dp"
+            android:text="Окна"
+            android:layout_weight="1"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/window_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/work_examples"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/condLayout"
@@ -149,7 +192,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/tab_layout"
+        app:layout_constraintTop_toBottomOf="@id/windLayout"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -170,38 +213,12 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/windLayout"
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/condLayout"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            style="@style/mainPageTitles"
-            android:textSize="20dp"
-            android:text="Окна"
-            android:layout_weight="1"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/window_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/sheathingLayout"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/windLayout"
+        app:layout_constraintTop_toBottomOf="@id/condLayout"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
@@ -220,21 +237,7 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
-    
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/work_examples"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/windLayout"/>
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/work_examples"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

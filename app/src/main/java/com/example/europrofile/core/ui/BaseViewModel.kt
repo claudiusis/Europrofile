@@ -11,16 +11,18 @@ import kotlinx.coroutines.launch
 
 abstract class BaseViewModel: ViewModel() {
 
-    abstract val sendRequest : suspend (String, String) -> RequestResult<User>
+    abstract suspend fun sendRequest(vararg args: String) : RequestResult<User>
 
     private val _authState = MutableLiveData<RequestResult<User>>()
     val authState : LiveData<RequestResult<User>> get() = _authState
-    fun sendCredentials(email: String, password: String) {
+    fun sendCredentials(vararg args: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
             _authState.postValue(RequestResult.Loading)
-            val result = sendRequest.invoke(email, password)
+            val result = sendRequest(*args)
             _authState.postValue(result)
+
+
         }
 
     }

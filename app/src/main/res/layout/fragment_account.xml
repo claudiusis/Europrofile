@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.tabs.account.AccountFragment">
 
     <TextView
@@ -37,21 +38,36 @@
         android:id="@+id/acc_info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
         android:gravity="center_vertical">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <RelativeLayout
+            android:id="@+id/icon_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/avatar_icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="20dp"
             android:background="@color/blue"
-            android:src="@drawable/account_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/textName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textName"
             app:shapeAppearanceOverlay="@style/circleImageView" />
+
+            <TextView
+                android:id="@+id/icon_text"
+                android:fontFamily="@font/raleway_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="36dp"
+                android:text="NS"/>
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/textName"
@@ -73,16 +89,18 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/acc_info_layout">
 
         <LinearLayout
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,22 +112,23 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_weight="3"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_constraintTop_toBottomOf="@+id/acc_info_layout" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="150dp"
                 android:fontFamily="@font/poppins"
                 android:text="Политика конфиденциальности"
                 android:textAlignment="center"
-                android:textColor="@color/blue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/settings_recycler" />
+                android:textColor="@color/blue"/>
+
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

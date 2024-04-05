@@ -1,16 +1,21 @@
 package com.example.europrofile.ui.tabs.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.europrofile.databinding.FragmentMainPageBinding
+import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
 import com.example.europrofile.ui.tabs.main.newsrecycler.ExamplesAdapter
 import com.example.europrofile.ui.tabs.main.newsrecycler.Image
 import com.example.europrofile.ui.tabs.main.newsrecycler.NewsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainPage : Fragment() {
 
     private lateinit var binding: FragmentMainPageBinding
@@ -19,6 +24,8 @@ class MainPage : Fragment() {
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var newsList: ArrayList<Image>
     private lateinit var exampleAdapter: ExamplesAdapter
+
+    private val viewModelUser : ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +37,10 @@ class MainPage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val uid = requireContext().getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("UID", "-1")?:"-1"
+
+        viewModelUser.getUserInfo(uid)
 
         viewPager2 = binding.newsPager
         newsAdapter = NewsAdapter(makeNews(), viewPager2)

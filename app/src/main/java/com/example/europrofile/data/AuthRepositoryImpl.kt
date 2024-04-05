@@ -8,13 +8,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject constructor(private val auth: FirebaseAuth, private val firestore: FirebaseFirestore)  : AuthRepository {
+class AuthRepositoryImpl @Inject constructor(private val auth: FirebaseAuth,
+                                             private val firestore: FirebaseFirestore)  : AuthRepository {
 
     override suspend fun signInWithEmailPassword(email: String, password: String): RequestResult<User> {
         return try {
             val user = auth.signInWithEmailAndPassword(email, password).await().user
                 ?: throw Exception("Ошибка входа")
-            RequestResult.Success(User(user.email?:"" , user.uid))
+            RequestResult.Success(User(user.uid , user.email?:""))
 
         } catch (e: Exception) {
             RequestResult.Error(e)
@@ -26,7 +27,8 @@ class AuthRepositoryImpl @Inject constructor(private val auth: FirebaseAuth, pri
             val authUser = auth.createUserWithEmailAndPassword(email, password).await().user ?: throw Exception("Ошибка регистрации")
             val user = User(id= authUser.uid, email = email, name = name, number = phoneNumber, password=password)
             val addingResult = addUser(user)
-            if ((addingResult as RequestResult.Success).data != "Success") {
+
+            if (addingResult is RequestResult.Error) {
                 throw Exception("Ошибка добваления в базу данных")
             }
            RequestResult.Success(user)
@@ -37,7 +39,7 @@ class AuthRepositoryImpl @Inject constructor(private val auth: FirebaseAuth, pri
 
     private suspend fun addUser(user: User) : RequestResult<String> {
         return try {
-            firestore.collection(FireBaseTags.USERS).add(
+            firestore.collection(FireBaseTags.USERS).document(user.id).set(
                 user
             ).await()
             RequestResult.Success("Success")

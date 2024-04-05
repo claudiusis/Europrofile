@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +15,7 @@ class ProfileFragment : Fragment() {
 
     lateinit var binding: FragmentProfileBinding
 
-    private val viewModel : ProfileViewModel by viewModels()
+    private val viewModel : ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +27,6 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.getUserInfo()
 
         viewModel.userInfo.observe(viewLifecycleOwner){
 

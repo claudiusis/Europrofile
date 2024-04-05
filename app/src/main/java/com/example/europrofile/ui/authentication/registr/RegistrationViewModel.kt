@@ -9,9 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(private val  authRepository: AuthRepository) : BaseViewModel(){
-    override val sendRequest: suspend (String, String) -> RequestResult<User> = {
-        email, password -> authRepository.signUp(email, password)
-    }
-
+    override suspend fun sendRequest(vararg args: String): RequestResult<User> =
+        authRepository.signUp(args[0], args[1], args[2], args[3])
 
 }
