@@ -4,6 +4,10 @@ buildscript {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.0-beta02")
         classpath("com.google.gms:google-services:4.4.1")
     }
+
+    repositories {
+        maven { url = uri("https://www.jitpack.io" ) }
+    }
 }
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.

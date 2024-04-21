@@ -1,15 +1,22 @@
 package com.example.europrofile
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.example.europrofile.core.FireBaseTags
+import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.ActivityMainBinding
+import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
+import com.example.europrofile.ui.accountpages.reviewcreation.ReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
+    val viewModelProfile: ProfileViewModel by viewModels()
+    private val reviewViewModel: ReviewViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,5 +36,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         navHost.navController.graph = graph
+
+        reviewViewModel.reviewSetState.observe(this){
+            when (it){
+                is RequestResult.Success -> {
+                    (viewModelProfile.userInfo.value as RequestResult.Success).data.countOfReviews++
+                    viewModelProfile.changeInfo((viewModelProfile.userInfo.value as RequestResult.Success).data,
+                        FireBaseTags.COUNT_OF_REVIEWS_CHANGES)
+                } else -> {}
+            }
+        }
+
     }
 }

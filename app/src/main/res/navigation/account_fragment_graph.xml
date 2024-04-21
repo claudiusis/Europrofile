@@ -21,10 +21,18 @@
         <action
             android:id="@+id/action_accountFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_contactInformationFragment"
+            app:destination="@id/contactInformationFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.europrofile.ui.accountpages.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/contactInformationFragment"
+        android:name="com.example.europrofile.ContactInformationFragment"
+        android:label="fragment_contact_information"
+        tools:layout="@layout/fragment_contact_information" />
 </navigation>

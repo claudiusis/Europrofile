@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:textAlignment="center"
+    android:layout_margin="8dp"
     android:background="@drawable/account_recycler"
-    android:layout_height="wrap_content"
-    android:backgroundTint="@color/white">
+    android:paddingBottom="15dp"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/basic_review_avatar"

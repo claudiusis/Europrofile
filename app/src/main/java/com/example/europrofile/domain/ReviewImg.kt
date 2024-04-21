@@ -1,4 +1,4 @@
-package com.example.europrofile.ui.tabs.comments.recycler
+package com.example.europrofile.domain
 
 import android.net.Uri
 

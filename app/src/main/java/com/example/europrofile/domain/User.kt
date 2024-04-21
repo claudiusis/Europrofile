@@ -1,7 +1,5 @@
 package com.example.europrofile.domain
 
-import android.net.Uri
-
 data class User (
     val id: String = "-1",
     var email: String = "",
@@ -9,4 +7,6 @@ data class User (
     var number: String = "+7 (***) *** **-**",
     var password: String = "1234",
     var address: String = "Не определён",
-    var imgUri : Uri? = null)
+    var imgUri : String? = null,
+    var countOfReviews :Int = 0,
+    var countOfOrders : Int = 0)
