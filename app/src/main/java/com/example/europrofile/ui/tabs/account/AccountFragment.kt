@@ -75,7 +75,7 @@ class AccountFragment : Fragment() {
             findNavController().navigate(R.id.action_accountFragment_to_profileFragment)
         }
 
-        recycler = requireActivity().findViewById(R.id.settings_recycler)
+        recycler = binding.settingsRecycler
         recycler.layoutManager = LinearLayoutManager(context)
 
         addItems()

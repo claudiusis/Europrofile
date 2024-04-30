@@ -2,9 +2,11 @@ package com.example.europrofile.core.di
 
 import com.example.europrofile.data.AccountRepositoryImpl
 import com.example.europrofile.data.AuthRepositoryImpl
+import com.example.europrofile.data.ConditionInfoImpl
 import com.example.europrofile.data.ReviewRepositoryImpl
 import com.example.europrofile.domain.AccountRepository
 import com.example.europrofile.domain.AuthRepository
+import com.example.europrofile.domain.ConditionInfo
 import com.example.europrofile.domain.ReviewRepository
 import dagger.Binds
 import dagger.Module
@@ -23,4 +25,6 @@ abstract class Module {
 
     @Binds
     abstract fun provideReviewRepository(reviewRepositoryImpl: ReviewRepositoryImpl): ReviewRepository
+    @Binds
+    abstract fun provideCondRepository(conditionInfoImpl: ConditionInfoImpl) : ConditionInfo
 }

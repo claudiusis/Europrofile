@@ -50,16 +50,9 @@ class ReviewAdapter(private val listOfReview: List<ViewReview>): RecyclerView.Ad
             val uriString = mutableListOf<Uri>()
             item.imageList.forEach { uriString.add(Uri.parse(it)) }
 
-            val adapter = ReviewImgAdapterShow(uriString){ context, into ->
-                for (imgLink in item.imageList) {
-                    Glide.with(context)
-                        .load(imgLink)
-                        .placeholder(R.color.blue).error(R.color.nav_color)
-                        .into(into as ImageView)
-                }
-            }
+            val adapter = ReviewImgAdapterShow(uriString)
 
-            recyclerView.layoutManager = LinearLayoutManager(view.context)
+            recyclerView.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
             recyclerView.adapter = adapter
         }
     }

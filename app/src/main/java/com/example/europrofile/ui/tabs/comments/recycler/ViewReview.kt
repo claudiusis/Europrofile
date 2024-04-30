@@ -12,3 +12,4 @@ data class ViewReview(
     val description: String? = "",
     val listOfUserLikes: List<String> = listOf(),
     val listOfUserDisLikes: List<String> = listOf())
+

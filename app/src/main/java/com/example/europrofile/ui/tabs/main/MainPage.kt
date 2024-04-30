@@ -7,12 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentMainPageBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
-import com.example.europrofile.ui.tabs.main.newsrecycler.ExamplesAdapter
+import com.example.europrofile.ui.tabs.main.condition.ConditionParentAdapter
+import com.example.europrofile.ui.tabs.main.condition.ConditionerViewModel
 import com.example.europrofile.ui.tabs.main.newsrecycler.Image
 import com.example.europrofile.ui.tabs.main.newsrecycler.NewsAdapter
+import com.example.europrofile.ui.tabs.main.windowrecycler.ExamplesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,16 +26,23 @@ class MainPage : Fragment() {
 
     private lateinit var viewPager2: ViewPager2
     private lateinit var newsAdapter: NewsAdapter
+
     private lateinit var newsList: ArrayList<Image>
     private lateinit var exampleAdapter: ExamplesAdapter
 
+    private lateinit var conditionParentAdapter: ConditionParentAdapter
+
     private val viewModelUser : ProfileViewModel by activityViewModels()
+    private val viewModelCond : ConditionerViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainPageBinding.inflate(layoutInflater)
+
+        viewModelCond.getConditionType()
+
         return binding.root
     }
 
@@ -51,6 +62,24 @@ class MainPage : Fragment() {
         exampleAdapter = ExamplesAdapter()
 
         viewPager2.adapter = exampleAdapter
+
+        binding.condRecycler.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModelCond.condCard.observe(viewLifecycleOwner){
+
+            when(it){
+                is RequestResult.Success -> {
+                    binding.condRecycler.adapter = ConditionParentAdapter(it.data)
+                }
+                is RequestResult.Loading -> {
+
+                }
+                else -> {
+
+                }
+            }
+
+        }
     }
 
 

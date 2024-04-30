@@ -8,7 +8,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.europrofile.R
 import com.makeramen.roundedimageview.RoundedImageView
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.launch
 
@@ -40,14 +41,8 @@ class NewsAdapter(val list : MutableList<Image>, private val viewPager2: ViewPag
         }
     }
 
-
     private fun infinity(list: MutableList<Image>) {
-
-
-
-         //   list.addAll(list)
-          //  notifyItemInserted(list.size)
-        MainScope().launch {
+        GlobalScope.launch(Dispatchers.Main) {
             list.addAll(list)
             notifyDataSetChanged()
         }
