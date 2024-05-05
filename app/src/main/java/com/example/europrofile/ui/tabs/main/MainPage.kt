@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.europrofile.R
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentMainPageBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
+import com.example.europrofile.ui.detailspage.DetailsViewModel
 import com.example.europrofile.ui.tabs.main.condition.ConditionParentAdapter
 import com.example.europrofile.ui.tabs.main.condition.ConditionerViewModel
 import com.example.europrofile.ui.tabs.main.newsrecycler.Image
@@ -34,6 +37,7 @@ class MainPage : Fragment() {
 
     private val viewModelUser : ProfileViewModel by activityViewModels()
     private val viewModelCond : ConditionerViewModel by activityViewModels()
+    private val detailsViewModel : DetailsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,7 +73,10 @@ class MainPage : Fragment() {
 
             when(it){
                 is RequestResult.Success -> {
-                    binding.condRecycler.adapter = ConditionParentAdapter(it.data)
+                    binding.condRecycler.adapter = ConditionParentAdapter(it.data) { link, imgList ->
+                        detailsViewModel.getData(link, imgList)
+                        findNavController().navigate(R.id.action_mainPage_to_detailsConditionerFragment)
+                    }
                 }
                 is RequestResult.Loading -> {
 
