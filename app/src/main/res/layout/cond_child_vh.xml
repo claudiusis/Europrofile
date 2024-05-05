@@ -20,11 +20,11 @@
 
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/slider"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:layout_width="match_parent"
         app:iss_auto_cycle="true"
-        app:iss_period="1000"
-        app:iss_delay="1000"
+        app:iss_period="5000"
+        app:iss_delay="5000"
         app:iss_text_align="CENTER"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

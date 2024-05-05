@@ -17,6 +17,8 @@ class ConditionerViewModel @Inject constructor(private val repository: Condition
     private val _conditionCard : MutableLiveData<RequestResult<List<CondTypeCard>>> = MutableLiveData()
     val condCard : LiveData<RequestResult<List<CondTypeCard>>> = _conditionCard
 
+    val condList : LiveData<List<CondTypeCard>> = repository.conditionLiveData
+
     fun getConditionType(){
         viewModelScope.launch(Dispatchers.IO) {
             _conditionCard.postValue(RequestResult.Loading)
@@ -25,4 +27,9 @@ class ConditionerViewModel @Inject constructor(private val repository: Condition
         }
     }
 
+/*    fun getConditioners(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getConditionsList()
+        }
+    }*/
 }

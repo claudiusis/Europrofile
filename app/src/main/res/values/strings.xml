@@ -39,4 +39,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="news">Новости</string>
     <string name="see_all">Посмотреть всё</string>
+    <string name="parameters">Характеристики</string>
 </resources>
