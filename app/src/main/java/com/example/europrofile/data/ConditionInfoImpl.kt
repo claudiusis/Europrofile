@@ -1,13 +1,14 @@
 package com.example.europrofile.data
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.europrofile.domain.ConditionInfo
 import com.example.europrofile.domain.WebPageData
 import com.example.europrofile.ui.tabs.main.condition.CondTypeCard
 import com.example.europrofile.ui.tabs.main.condition.Conditioner
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -18,13 +19,10 @@ class ConditionInfoImpl @Inject constructor() : ConditionInfo {
 
     private val url = "https://dantex.ru/products/home/onwall/"
 
-    private val _condLiveData : MutableLiveData<List<CondTypeCard>> = MutableLiveData()
-    val conditionLiveData : LiveData<List<CondTypeCard>> = _condLiveData
 
-    override suspend fun getConditionsList() : RequestResult<List<CondTypeCard>> = withContext(Dispatchers.IO) {
+    override suspend fun getConditionsList() : Flow<RequestResult<CondTypeCard>> = flow {
         try {
 
-            val conditionsList = mutableListOf<CondTypeCard>()
             val document = Jsoup.connect(url).get()
             val elements = document.select("div[class=ctl-list]")
 
@@ -61,9 +59,9 @@ class ConditionInfoImpl @Inject constructor() : ConditionInfo {
 
                     val link =
                         "https://dantex.ru" +
-                        conditionsBlock.select("th").eq(conditions)
-                        .select("a")
-                        .attr("href")
+                                conditionsBlock.select("th").eq(conditions)
+                                    .select("a")
+                                    .attr("href")
 
                     if (linkArray.isEmpty()){
                         linkArray.addAll(getImages(link))
@@ -72,27 +70,13 @@ class ConditionInfoImpl @Inject constructor() : ConditionInfo {
                     listOfConditions.add(Conditioner(linkArray, name, price, link))
                 }
 
-                conditionsList.add(
-                    CondTypeCard(
-                    title, listOfConditions
-                )
-                )
-
-
-/*                withContext(Dispatchers.Main){
-                    _condLiveData.value = _condLiveData.value.orEmpty() + CondTypeCard(
-                        title, listOfConditions
-                    )
-                }*/
+                emit(RequestResult.Success(CondTypeCard(title, listOfConditions)))
 
             }
-
-            RequestResult.Success(conditionsList)
-
         } catch (e: IOException){
-           RequestResult.Error(e)
+            emit(RequestResult.Error(e))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     private fun getImages(link: String) : List<String>  {
         val list = mutableListOf<String>()

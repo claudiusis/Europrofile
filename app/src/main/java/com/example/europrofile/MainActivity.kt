@@ -8,19 +8,23 @@ import com.example.europrofile.core.FireBaseTags
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.ActivityMainBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
-import com.example.europrofile.ui.accountpages.reviewcreation.ReviewViewModel
+import com.example.europrofile.ui.reviewcreation.ReviewViewModel
+import com.yandex.mapkit.MapKitFactory
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    val viewModelProfile: ProfileViewModel by viewModels()
+    private val viewModelProfile: ProfileViewModel by viewModels()
     private val reviewViewModel: ReviewViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        MapKitFactory.initialize(this)
+
         setContentView(binding.root)
 
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

@@ -34,7 +34,7 @@ class AccountFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAccountBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -84,6 +84,7 @@ class AccountFragment : Fragment() {
                 title  ->
             when (title) {
                 "Написать отзыв" -> findNavController().navigate(R.id.action_accountFragment_to_reviewCreationFragment)
+                "Контакты" -> findNavController().navigate(R.id.action_accountFragment_to_contactInformationFragment)
             }
         }, recyclerList)
         recycler.adapter = adapter
@@ -98,7 +99,7 @@ class AccountFragment : Fragment() {
         recyclerList.add(ParentItem("Возможности", settingsList))
         val settingsList2 = ArrayList<ChildItem>()
         settingsList2.add(ChildItem("О компании", R.drawable.baseline_arrow_forward_ios_24))
-        settingsList2.add(ChildItem("Контаты", R.drawable.baseline_arrow_forward_ios_24))
+        settingsList2.add(ChildItem("Контакты", R.drawable.baseline_arrow_forward_ios_24))
         settingsList2.add(ChildItem("О приложении", R.drawable.baseline_arrow_forward_ios_24))
         settingsList2.add(ChildItem("Выйти из аккаунта", R.drawable.baseline_arrow_forward_ios_24))
         recyclerList.add(ParentItem("Дополнительно", settingsList2))

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentReviewListBinding
-import com.example.europrofile.ui.accountpages.reviewcreation.ReviewViewModel
+import com.example.europrofile.ui.reviewcreation.ReviewViewModel
 import com.example.europrofile.ui.tabs.comments.recycler.ReviewAdapter
 
 class ReviewListFragment : Fragment() {

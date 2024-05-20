@@ -8,15 +8,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.R
 
-class ConditionParentAdapter(private val listOfCondTypes : List<CondTypeCard>, private val clickFunc : (link: String, imgList : List<String>)->Unit): RecyclerView.Adapter<ConditionParentAdapter.ConditionParentVH>() {
+class ConditionParentAdapter(private val listOfCondTypes : ArrayList<CondTypeCard> = arrayListOf(), private val clickFunc : (link: String, imgList : List<String>)->Unit): RecyclerView.Adapter<ConditionParentAdapter.ConditionParentVH>() {
 
-/*    fun addItems(list: List<CondTypeCard>){
-        val callback = RecyclerDiffUtil<CondTypeCard>(
-            listOfCondTypes, list,
-            {old, new -> old.title==new.title}
-        )
-
-    }*/
+    fun addItems(item : CondTypeCard){
+        listOfCondTypes.add(item)
+        notifyItemInserted(listOfCondTypes.size-1)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConditionParentVH {
         val layoutInflater = LayoutInflater.from(parent.context)

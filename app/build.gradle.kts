@@ -45,6 +45,7 @@ android {
 
 }
 
+
 dependencies {
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -54,6 +55,11 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("com.android.support.test:runner:1.0.2")
+    androidTestImplementation("com.android.support.test:rules:1.0.2")
+
+    //MapKit
+    implementation("com.yandex.android:maps.mobile:4.6.1-lite")
 
     //JSOUP
     implementation("org.jsoup:jsoup:1.12.2")

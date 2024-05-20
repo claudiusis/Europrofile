@@ -26,7 +26,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
 
-
     <ImageButton
         android:id="@+id/notificBtn"
         android:layout_width="48dp"
@@ -180,6 +179,7 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/work_examples"
             android:layout_width="match_parent"
+            android:paddingBottom="100dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -6,9 +6,15 @@ buildscript {
     }
 
     repositories {
+        mavenCentral()
+        maven {
+            url = uri("http://maven.google.com/")
+            isAllowInsecureProtocol = true
+        }
         maven { url = uri("https://www.jitpack.io" ) }
     }
 }
+
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {

@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.europrofile.R
-import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentMainPageBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
 import com.example.europrofile.ui.detailspage.DetailsViewModel
@@ -67,25 +66,16 @@ class MainPage : Fragment() {
 
         viewPager2.adapter = exampleAdapter
 
+
+        val condAdapter = ConditionParentAdapter() { link, imgList ->
+            detailsViewModel.getData(link, imgList)
+            findNavController().navigate(R.id.action_mainPage_to_detailsConditionerFragment)
+        }
+        binding.condRecycler.adapter = condAdapter
         binding.condRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         viewModelCond.condCard.observe(viewLifecycleOwner){
-
-            when(it){
-                is RequestResult.Success -> {
-                    binding.condRecycler.adapter = ConditionParentAdapter(it.data) { link, imgList ->
-                        detailsViewModel.getData(link, imgList)
-                        findNavController().navigate(R.id.action_mainPage_to_detailsConditionerFragment)
-                    }
-                }
-                is RequestResult.Loading -> {
-
-                }
-                else -> {
-
-                }
-            }
-
+            condAdapter.addItems(it.last())
         }
     }
 

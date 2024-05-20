@@ -14,22 +14,32 @@ import javax.inject.Inject
 @HiltViewModel
 class ConditionerViewModel @Inject constructor(private val repository: ConditionInfoImpl): ViewModel() {
 
-    private val _conditionCard : MutableLiveData<RequestResult<List<CondTypeCard>>> = MutableLiveData()
-    val condCard : LiveData<RequestResult<List<CondTypeCard>>> = _conditionCard
+    private val _conditionCard : MutableLiveData<List<CondTypeCard>> = MutableLiveData()
+    val condCard : LiveData<List<CondTypeCard>> = _conditionCard
 
-    val condList : LiveData<List<CondTypeCard>> = repository.conditionLiveData
+    private val _status : MutableLiveData<RequestResult<CondTypeCard>> = MutableLiveData()
+    val status : LiveData<RequestResult<CondTypeCard>> = _status
 
     fun getConditionType(){
         viewModelScope.launch(Dispatchers.IO) {
-            _conditionCard.postValue(RequestResult.Loading)
-            val result = repository.getConditionsList()
-            _conditionCard.postValue(result)
+            _status.postValue(RequestResult.Loading)
+            repository.getConditionsList().collect {
+                result ->
+                when(result){
+                    is RequestResult.Success -> {
+                        _conditionCard.postValue((_conditionCard.value ?: emptyList()) + result.data)
+                    }
+                    is RequestResult.Error -> {
+
+                    }
+                    is RequestResult.Loading -> {
+
+                    }
+                }
+            }
+            _status.postValue(RequestResult.Success(_conditionCard.value?.last()?: CondTypeCard()))
         }
     }
 
-/*    fun getConditioners(){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getConditionsList()
-        }
-    }*/
+
 }

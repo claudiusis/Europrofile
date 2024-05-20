@@ -27,7 +27,6 @@ class AccountRepositoryImpl @Inject constructor(private val firestore: FirebaseF
         }
     }
 
-
     private suspend fun loadImg(uri : Uri): RequestResult<Uri>{
         return try {
             val reqUri = storage.child(FireBaseTags.USER_PHOTO+"/${uri.lastPathSegment}")

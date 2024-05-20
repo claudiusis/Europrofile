@@ -1,4 +1,4 @@
-package com.example.europrofile.ui.accountpages.reviewcreation
+package com.example.europrofile.ui.reviewcreation
 
 import android.os.Bundle
 import android.util.Log
