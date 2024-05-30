@@ -7,20 +7,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.europrofile.R
 import com.example.europrofile.core.Variants
-import com.example.europrofile.core.ui.RecyclerDiffUtil
 import java.util.Locale
 
 class ReviewAdapter(private val listOfReview: ArrayList<ViewReview> = arrayListOf(), private val likeBtn: (type: Variants, reviewId: String) -> Unit,
     private val check : (review : ReviewVH, data : ViewReview) -> Unit): RecyclerView.Adapter<ReviewAdapter.ReviewVH>() {
 
     fun changeList(newList: List<ViewReview>){
-        val callbck = RecyclerDiffUtil<ViewReview>(
+/*        val callbck = RecyclerDiffUtil<ViewReview>(
             old=listOfReview, new=newList,
             {old, new -> old.id == new.id },
             {old, new ->  old.idOfUser == new.idOfUser && old.listOfUserDisLikes==new.listOfUserDisLikes
@@ -28,12 +26,11 @@ class ReviewAdapter(private val listOfReview: ArrayList<ViewReview> = arrayListO
         )
         listOfReview.clear()
         listOfReview.addAll(newList)
- //       listOfReview.sortBy { it.date }
-//        listOfReview.reverse()
         val result = DiffUtil.calculateDiff(callbck)
-        result.dispatchUpdatesTo(this)
-
-//        notifyDataSetChanged()
+        result.dispatchUpdatesTo(this)*/
+        listOfReview.clear()
+        listOfReview.addAll(newList)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewVH {

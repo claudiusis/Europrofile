@@ -10,7 +10,6 @@ import com.example.europrofile.ui.tabs.comments.recycler.ViewReview
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.storage.StorageReference
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -48,7 +47,7 @@ class ReviewRepositoryImpl @Inject constructor(private val firestore: FirebaseFi
 
     override suspend fun subscribePostChanges() : Flow<RequestResult<List<ViewReview>>> {
         return  callbackFlow {
-            val collection = firestore.collection(FireBaseTags.REVIEWS_STORAGE).orderBy("date", Query.Direction.DESCENDING)
+            val collection = firestore.collection(FireBaseTags.REVIEWS_STORAGE)
             val listener = collection.addSnapshotListener { value, error ->
                 error?.let {
                     Log.d("QWERTY", "Error with listener")
@@ -61,34 +60,15 @@ class ReviewRepositoryImpl @Inject constructor(private val firestore: FirebaseFi
 
                     value.documents.forEach {
 
-                        val viewReview  = it.toObject(Review::class.java)
-
-                        CoroutineScope(Dispatchers.IO).async {
-
-                            val user = firestore.collection(FireBaseTags.USERS).document(viewReview?.idOfUSer?:"").get().await().toObject(User::class.java)
-
+                        it.toObject(ViewReview::class.java).let { it1 ->
                             list.add(
-                                ViewReview(
-                                    viewReview!!.id,
-                                    viewReview.idOfUSer,
-                                    user!!.name,
-                                    user.imgUri,
-                                    viewReview.date,
-                                    viewReview.imageList,
-                                    viewReview.description,
-                                    viewReview.listOfUserLikes,
-                                    viewReview.listOfUserDisLikes
-                                )
+                                it1!!
                             )
-
-                            trySend(RequestResult.Success(list))
-
                         }
-
-
 
                     }
 
+                    trySend(RequestResult.Success(list))
 
                 }
 
