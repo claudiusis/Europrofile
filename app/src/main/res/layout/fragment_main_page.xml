@@ -10,7 +10,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5f5f5"
+    android:background="#FBFBFB"
     tools:context=".ui.tabs.main.MainPage">
 
     <ImageView
@@ -126,7 +126,7 @@
         app:tabBackground="@drawable/tab_selector"
         android:background="@android:color/transparent"
         app:tabIndicator="@null"
-        app:tabMode="scrollable"
+        app:tabMode="fixed"
         app:tabSelectedTextColor="@color/white"
         app:tabTextColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -144,11 +144,6 @@
                 android:text="Кондиционеры"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>
-        <com.google.android.material.tabs.TabItem
-            android:text="Обшивка"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
-
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -204,6 +199,21 @@
             android:textSize="20dp"
             android:text="Кондиционеры"
             android:layout_weight="1"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_condition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:tabBackground="@drawable/tab_selector"
+            android:background="@android:color/transparent"
+            app:tabIndicator="@null"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cond_recycler"

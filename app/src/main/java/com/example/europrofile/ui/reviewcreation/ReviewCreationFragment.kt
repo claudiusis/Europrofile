@@ -65,8 +65,8 @@ class ReviewCreationFragment : Fragment() {
                 Date(),
                 stringUri,
                 binding.reviewCreationInput.text.toString(),
-                listOf(),
-                listOf()
+                mutableListOf(),
+                mutableListOf()
             )
 
             reviewViewModel.addReview(

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.R
 
-class ConditionParentAdapter(private val listOfCondTypes : ArrayList<CondTypeCard> = arrayListOf(), private val clickFunc : (link: String, imgList : List<String>)->Unit): RecyclerView.Adapter<ConditionParentAdapter.ConditionParentVH>() {
+class ConditionParentAdapter(private val listOfCondTypes : ArrayList<CondTypeCard> = arrayListOf(), private val clickFunc : (link: String, imgList : List<String>)->Unit, private val clickLike : (elem: Conditioner)->Unit): RecyclerView.Adapter<ConditionParentAdapter.ConditionParentVH>() {
 
     fun addItems(item : CondTypeCard){
         listOfCondTypes.add(item)
@@ -24,7 +24,7 @@ class ConditionParentAdapter(private val listOfCondTypes : ArrayList<CondTypeCar
         holder.title.text = listOfCondTypes[position].title
 
         holder.recycler.layoutManager = GridLayoutManager(holder.itemView.context, 2)
-        holder.recycler.adapter = ConditionChildAdapter(listOfCondTypes[position].condList, clickFunc)
+        holder.recycler.adapter = ConditionChildAdapter(listOfCondTypes[position].condList, clickFunc, clickLike)
     }
 
     override fun getItemCount(): Int = listOfCondTypes.size

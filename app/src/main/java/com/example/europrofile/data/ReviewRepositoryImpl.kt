@@ -8,10 +8,17 @@ import com.example.europrofile.domain.ReviewRepository
 import com.example.europrofile.domain.User
 import com.example.europrofile.ui.tabs.comments.recycler.ViewReview
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -39,38 +46,109 @@ class ReviewRepositoryImpl @Inject constructor(private val firestore: FirebaseFi
         }
     }
 
-    override suspend fun getReviewList(): RequestResult<List<ViewReview>> {
-        return try {
-            val list = firestore.collection(FireBaseTags.REVIEWS_STORAGE).get().await()
-            val array = mutableListOf<ViewReview>()
+    override suspend fun subscribePostChanges() : Flow<RequestResult<List<ViewReview>>> {
+        return  callbackFlow {
+            val collection = firestore.collection(FireBaseTags.REVIEWS_STORAGE).orderBy("date", Query.Direction.DESCENDING)
+            val listener = collection.addSnapshotListener { value, error ->
+                error?.let {
+                    Log.d("QWERTY", "Error with listener")
+                    return@addSnapshotListener
+                }
+
+                value?.let {
+
+                    val list = mutableListOf<ViewReview>()
+
+                    value.documents.forEach {
+
+                        val viewReview  = it.toObject(Review::class.java)
+
+                        CoroutineScope(Dispatchers.IO).async {
+
+                            val user = firestore.collection(FireBaseTags.USERS).document(viewReview?.idOfUSer?:"").get().await().toObject(User::class.java)
+
+                            list.add(
+                                ViewReview(
+                                    viewReview!!.id,
+                                    viewReview.idOfUSer,
+                                    user!!.name,
+                                    user.imgUri,
+                                    viewReview.date,
+                                    viewReview.imageList,
+                                    viewReview.description,
+                                    viewReview.listOfUserLikes,
+                                    viewReview.listOfUserDisLikes
+                                )
+                            )
+
+                            trySend(RequestResult.Success(list))
+
+                        }
+
+
+
+                    }
+
+
+                }
+
+            }
+
+            awaitClose{
+                listener.remove()
+            }
+        }
+    }
+
+    override suspend fun getReviewList(): Flow<RequestResult<ViewReview>> = flow {
+        try {
+            val list = firestore.collection(FireBaseTags.REVIEWS_STORAGE).orderBy("date", Query.Direction.DESCENDING).get().await()
             for (doc in list){
                 val review = doc.toObject(Review::class.java)
                 val user = firestore.collection(FireBaseTags.USERS).document(review.idOfUSer).get().await().toObject(User::class.java)
                     ?: throw Exception("Ошибка получения владельца отзыва")
 
-                array.add(
-                    ViewReview(
-                        review.id,
-                        user.id,
-                        user.name,
-                        user.imgUri,
-                        review.date,
-                        review.imageList,
-                        review.description, review.listOfUserLikes,
-                        review.listOfUserDisLikes
+                Log.d("QWERTY", user.toString())
+
+                emit(
+                    RequestResult.Success(
+                        ViewReview(
+                            review.id,
+                            user.id,
+                            user.name,
+                            user.imgUri,
+                            review.date,
+                            review.imageList,
+                            review.description, review.listOfUserLikes,
+                            review.listOfUserDisLikes
+                        )
                     )
                 )
             }
-            RequestResult.Success(array)
         } catch (e: Exception){
-            Log.i("QWERTY", e.message.toString())
-            RequestResult.Error(Exception("Ошибка получения списка"))
+            emit(RequestResult.Error(Exception("Ошибка получения списка")))
         }
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun updateLike(data: ViewReview) : RequestResult<String> {
+        return try {
+
+            val doc = firestore.collection(FireBaseTags.REVIEWS_STORAGE).document(data.id?:"")
+            val res = doc.update(
+                "listOfUserLikes", data.listOfUserLikes,
+                "listOfUserDisLikes", data.listOfUserDisLikes
+            ).await() ?: throw Exception("Ошибка изменения лайка")
+
+            RequestResult.Success("It's OK")
+
+        } catch (e: Exception){
+            RequestResult.Error(Exception("Ошибка изменения лайка"))
+        }
+
     }
 
     override suspend fun loadReview(review: Review): RequestResult<Review> {
         return try {
-
             val uriList : MutableList<Uri> = mutableListOf()
             val loadResult = withContext(Dispatchers.IO) {
                 review.imageList.forEach { uriList.add(Uri.parse(it)) }

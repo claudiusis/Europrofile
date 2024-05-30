@@ -5,7 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Europrofile" parent="Base.Theme.Europrofile" />
+    <style name="Theme.Europrofile" parent="Base.Theme.Europrofile" >
+        <item name="backgroundColor">@color/white</item>
+    </style>
 
     <style name="NavBar" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@android:color/transparent</item>

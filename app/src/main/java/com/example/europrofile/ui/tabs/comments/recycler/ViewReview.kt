@@ -10,6 +10,7 @@ data class ViewReview(
     val date: Date? = null,
     var imageList: List<String> = listOf(),
     val description: String? = "",
-    val listOfUserLikes: List<String> = listOf(),
-    val listOfUserDisLikes: List<String> = listOf())
+    val listOfUserLikes: MutableList<String> = mutableListOf(),
+    val listOfUserDisLikes: MutableList<String> = mutableListOf()
+)
 

@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.accountpages.contactinfo.ContactInformationFragment"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <TextView
@@ -278,16 +279,38 @@
         <TextView
             android:id="@+id/link"
             android:text="https://evroprofil173.ru"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:textColor="@color/blue"
             android:textSize="14sp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            android:paddingBottom="200dp"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/link_title"/>
+
+        <ImageView
+            android:id="@+id/contact_logo"
+            android:src="@drawable/img"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/link"/>
+
+        <TextView
+            android:id="@+id/inn"
+            android:text="ИНН 7328086844 \nОГРН 1157325008631"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#989898"
+            android:lineSpacingMultiplier="1.4"
+            android:paddingBottom="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contact_logo"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

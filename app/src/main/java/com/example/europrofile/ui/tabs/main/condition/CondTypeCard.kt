@@ -2,5 +2,5 @@ package com.example.europrofile.ui.tabs.main.condition
 
 data class CondTypeCard(
     val title: String="",
-    val condList : List<Conditioner> = listOf()
+    val condList : MutableList<Conditioner> = mutableListOf()
 )

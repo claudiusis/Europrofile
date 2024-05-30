@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.europrofile.R
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +44,13 @@ class ProfileFragment : Fragment() {
                     binding.profileInfo2.text = result.data.email
                     binding.profileInfo3.text = result.data.address
                     binding.profileInfo4.text = "⚫".repeat(result.data.password.length)
+
+
+                    binding.iconText.setTextColor(resources.getColor(R.color.white))
+                    binding.iconText.text = if (it.data.name.split(" ").size==2)
+                        it.data.name[0].toString() + (it.data.name.split(" ")[1][0]).toString()
+                    else it.data.name[0].toString()
+
 
                 }
                 is RequestResult.Error -> {

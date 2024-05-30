@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.europrofile.R
+import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentMainPageBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
 import com.example.europrofile.ui.detailspage.DetailsViewModel
@@ -19,6 +20,7 @@ import com.example.europrofile.ui.tabs.main.condition.ConditionerViewModel
 import com.example.europrofile.ui.tabs.main.newsrecycler.Image
 import com.example.europrofile.ui.tabs.main.newsrecycler.NewsAdapter
 import com.example.europrofile.ui.tabs.main.windowrecycler.ExamplesAdapter
+import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,17 +46,22 @@ class MainPage : Fragment() {
     ): View {
         binding = FragmentMainPageBinding.inflate(layoutInflater)
 
-        viewModelCond.getConditionType()
+        val uid = requireContext().getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("UID", "-1")?:"-1"
+
+        viewModelUser.getUserInfo(uid)
+
+        viewModelUser.userInfo.observe(viewLifecycleOwner){
+            if (it is RequestResult.Success) {
+                viewModelCond.getConditionType(it.data)
+            }
+        }
 
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val uid = requireContext().getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("UID", "-1")?:"-1"
-
-        viewModelUser.getUserInfo(uid)
 
         viewPager2 = binding.newsPager
         newsAdapter = NewsAdapter(makeNews(), viewPager2)
@@ -66,11 +73,42 @@ class MainPage : Fragment() {
 
         viewPager2.adapter = exampleAdapter
 
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab!!.text){
+                    "Кондиционеры" -> {
+                        binding.condLayout.visibility = View.VISIBLE
+                        binding.windLayout.visibility = View.GONE
+                        binding.condRecycler.setPadding(0,0,0,120)
+                    }
+                    "Все товары" -> {
+                        binding.condLayout.visibility = View.VISIBLE
+                        binding.windLayout.visibility = View.VISIBLE
+                        binding.condRecycler.setPadding(0,0,0,0)
+                    }
+                    "Окна" -> {
+                        binding.condLayout.visibility = View.GONE
+                        binding.windLayout.visibility = View.VISIBLE
+                        binding.condRecycler.setPadding(0,0,0,0)
+                    }
+                }
+            }
 
-        val condAdapter = ConditionParentAdapter() { link, imgList ->
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+            }
+        })
+
+
+        val condAdapter = ConditionParentAdapter(arrayListOf(), { link, imgList ->
             detailsViewModel.getData(link, imgList)
             findNavController().navigate(R.id.action_mainPage_to_detailsConditionerFragment)
-        }
+        }, { elem ->
+            viewModelCond.addFavourites(elem)
+        })
         binding.condRecycler.adapter = condAdapter
         binding.condRecycler.layoutManager = LinearLayoutManager(requireContext())
 

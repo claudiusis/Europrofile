@@ -9,5 +9,14 @@
         android:id="@+id/favouritesFragment"
         android:name="com.example.europrofile.ui.tabs.favourites.FavouritesFragment"
         android:label="fragment_favourites"
-        tools:layout="@layout/fragment_favourites" />
+        tools:layout="@layout/fragment_favourites" >
+        <action
+            android:id="@+id/action_favouritesFragment_to_detailsConditionerFragment2"
+            app:destination="@id/detailsConditionerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsConditionerFragment2"
+        android:name="com.example.europrofile.ui.detailspage.DetailsConditionerFragment"
+        android:label="fragment_details_conditioner"
+        tools:layout="@layout/fragment_details_conditioner" />
 </navigation>

@@ -9,4 +9,5 @@ data class User (
     var address: String = "Не определён",
     var imgUri : String? = null,
     var countOfReviews :Int = 0,
-    var countOfOrders : Int = 0)
+    var countOfOrders : Int = 0,
+    val listOfFavourites : ArrayList<String> = arrayListOf())

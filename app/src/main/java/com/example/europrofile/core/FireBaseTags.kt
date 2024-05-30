@@ -6,3 +6,8 @@ object FireBaseTags {
     const val COUNT_OF_REVIEWS_CHANGES = "ReviewCount"
     const val USER_PHOTO = "UserAvatars"
 }
+
+enum class Variants {
+    Like,
+    Dislike,
+}
