@@ -20,7 +20,7 @@ class ReviewViewModel @Inject constructor(private val repository: ReviewReposito
     private val _reviewGetState = MutableLiveData<List<ViewReview>>()
     val reviewGetState: LiveData<List<ViewReview>> = _reviewGetState
 
-    private val _statusOfLoad = MutableLiveData<RequestResult<ViewReview>>()
+    private val _statusOfLoad = MutableLiveData<RequestResult<String>>()
 
     private val _reviewSetState = MutableLiveData<RequestResult<Review>>()
     val reviewSetState: LiveData<RequestResult<Review>> = _reviewSetState
@@ -82,6 +82,8 @@ class ReviewViewModel @Inject constructor(private val repository: ReviewReposito
             }
         }
 
+        _reviewGetState.postValue(_reviewGetState.value)
+
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateLike(review?:ViewReview())
         }
@@ -94,9 +96,14 @@ class ReviewViewModel @Inject constructor(private val repository: ReviewReposito
                 when(result){
                     is RequestResult.Success -> {
 
-                        val data = (_reviewGetState.value?: emptyList()) + result.data
+                        if ((_reviewGetState.value?.isNotEmpty()) == true && _reviewGetState.value?.find { result.data.id==it.id }!=null ){
+                            _reviewGetState.value?.find { result.data.id==it.id }
+                        } else {
+                            _reviewGetState.postValue((_reviewGetState.value?: emptyList()) + result.data)
+                        }
 
-                        _reviewGetState.postValue(data.distinctBy { it.id })
+
+
                     }
                     is RequestResult.Loading,
                     is RequestResult.Error -> {
@@ -104,22 +111,16 @@ class ReviewViewModel @Inject constructor(private val repository: ReviewReposito
                     }
                 }
             }
-            _statusOfLoad.postValue(RequestResult.Success(_reviewGetState.value?.last()?: ViewReview()))
+
+            _statusOfLoad.postValue(RequestResult.Success("OK"))
         }
 
 
 
-/*    fun getUserReviews(uid: String){
-        if ((reviewGetState.value as RequestResult.Success).data.isEmpty()){
-            viewModelScope.launch {
-
-            }
-        } else {
-            _userReviews.postValue(RequestResult.Success(
-                (_reviewGetState.value as RequestResult.Success).data.filter {
-                    it.idOfUser == uid
-                })
-            )
+    fun getUserReviews(uid: String) : List<ViewReview>  {
+        if (_reviewGetState.value == null){
+            getReviews()
         }
-    }*/
+        return _reviewGetState.value?.filter { it.idOfUser == uid }?: emptyList()
+    }
 }

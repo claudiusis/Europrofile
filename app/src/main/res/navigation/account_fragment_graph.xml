@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_accountFragment_to_contactInformationFragment"
             app:destination="@id/contactInformationFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_myCommentsFragment"
+            app:destination="@id/myCommentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -35,4 +38,8 @@
         android:name="com.example.europrofile.ui.accountpages.contactinfo.ContactInformationFragment"
         android:label="fragment_contact_information"
         tools:layout="@layout/fragment_contact_information" />
+    <fragment
+        android:id="@+id/myCommentsFragment"
+        android:name="com.example.europrofile.ui.accountpages.mycomments.MyCommentsFragment"
+        android:label="MyCommentsFragment" />
 </navigation>

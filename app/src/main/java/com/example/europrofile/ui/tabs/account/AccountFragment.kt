@@ -85,6 +85,7 @@ class AccountFragment : Fragment() {
             when (title) {
                 "Написать отзыв" -> findNavController().navigate(R.id.action_accountFragment_to_reviewCreationFragment)
                 "Контакты" -> findNavController().navigate(R.id.action_accountFragment_to_contactInformationFragment)
+                "Мои отзывы" -> findNavController().navigate(R.id.action_accountFragment_to_myCommentsFragment)
             }
         }, recyclerList)
         recycler.adapter = adapter

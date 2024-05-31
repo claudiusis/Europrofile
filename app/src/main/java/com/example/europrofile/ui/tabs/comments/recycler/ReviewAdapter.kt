@@ -18,16 +18,6 @@ class ReviewAdapter(private val listOfReview: ArrayList<ViewReview> = arrayListO
     private val check : (review : ReviewVH, data : ViewReview) -> Unit): RecyclerView.Adapter<ReviewAdapter.ReviewVH>() {
 
     fun changeList(newList: List<ViewReview>){
-/*        val callbck = RecyclerDiffUtil<ViewReview>(
-            old=listOfReview, new=newList,
-            {old, new -> old.id == new.id },
-            {old, new ->  old.idOfUser == new.idOfUser && old.listOfUserDisLikes==new.listOfUserDisLikes
-                    && old.listOfUserLikes==new.listOfUserLikes}
-        )
-        listOfReview.clear()
-        listOfReview.addAll(newList)
-        val result = DiffUtil.calculateDiff(callbck)
-        result.dispatchUpdatesTo(this)*/
         listOfReview.clear()
         listOfReview.addAll(newList)
         notifyDataSetChanged()

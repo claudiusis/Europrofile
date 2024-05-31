@@ -1,5 +1,6 @@
 package com.example.europrofile
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -20,8 +21,15 @@ class MainActivity : AppCompatActivity() {
     private val viewModelProfile: ProfileViewModel by viewModels()
     private val reviewViewModel: ReviewViewModel by viewModels()
 
+    lateinit var uid : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        uid = this.getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("UID", "-1")?:"-1"
+
+        viewModelProfile.getUserInfo(uid)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         window.statusBarColor = Color.BLACK

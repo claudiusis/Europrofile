@@ -10,9 +10,19 @@ import com.example.europrofile.R
 
 class ConditionParentAdapter(private val listOfCondTypes : ArrayList<CondTypeCard> = arrayListOf(), private val clickFunc : (link: String, imgList : List<String>)->Unit, private val clickLike : (elem: Conditioner)->Unit): RecyclerView.Adapter<ConditionParentAdapter.ConditionParentVH>() {
 
-    fun addItems(item : CondTypeCard){
-        listOfCondTypes.add(item)
-        notifyItemInserted(listOfCondTypes.size-1)
+    fun addItems(items : ArrayList<CondTypeCard>){
+/*        val callback = RecyclerDiffUtil<CondTypeCard>(
+            listOfCondTypes, items, {
+                old, new -> old.title==new.title
+            }
+        )
+        listOfCondTypes.clear()
+        listOfCondTypes.addAll(items)
+        val result = DiffUtil.calculateDiff(callback)
+        result.dispatchUpdatesTo(this)*/
+        listOfCondTypes.clear()
+        listOfCondTypes.addAll(items)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConditionParentVH {

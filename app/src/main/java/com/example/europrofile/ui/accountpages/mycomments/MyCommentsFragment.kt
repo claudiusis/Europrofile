@@ -1,4 +1,4 @@
-package com.example.europrofile.ui.tabs.comments
+package com.example.europrofile.ui.accountpages.mycomments
 
 import android.graphics.Color
 import android.os.Bundle
@@ -9,20 +9,19 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.R
 import com.example.europrofile.data.RequestResult
-import com.example.europrofile.databinding.FragmentReviewListBinding
+import com.example.europrofile.databinding.FragmentMyCommentsBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
 import com.example.europrofile.ui.reviewcreation.ReviewViewModel
 import com.example.europrofile.ui.tabs.comments.recycler.ReviewAdapter
+import com.example.europrofile.ui.tabs.comments.recycler.ViewReview
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReviewListFragment : Fragment() {
+class MyCommentsFragment : Fragment() {
 
-    private lateinit var binding: FragmentReviewListBinding
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding : FragmentMyCommentsBinding
 
     private val chatsViewModel : ReviewViewModel by activityViewModels()
     private val user : ProfileViewModel by activityViewModels()
@@ -31,18 +30,15 @@ class ReviewListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentReviewListBinding.inflate(layoutInflater)
+        binding = FragmentMyCommentsBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        chatsViewModel.getReviews()
-
-        recyclerView = binding.reviewRv
-        recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
-        val adapter = ReviewAdapter(arrayListOf(), { type, reviewId ->
+        binding.myComRecycler.layoutManager = LinearLayoutManager(this.requireContext())
+        val adapter = ReviewAdapter(chatsViewModel.getUserReviews((user.userInfo.value as RequestResult.Success).data.id) as ArrayList<ViewReview>, { type, reviewId ->
 
             chatsViewModel.updateReview(reviewId, type, (user.userInfo.value as RequestResult.Success).data.id)
 
@@ -72,13 +68,13 @@ class ReviewListFragment : Fragment() {
             }
 
         })
-        recyclerView.adapter = adapter
+        binding.myComRecycler.adapter = adapter
 
         chatsViewModel.reviewGetState.observe(viewLifecycleOwner){
 
-            adapter.changeList(it)
+            adapter.changeList(chatsViewModel.getUserReviews((user.userInfo.value as RequestResult.Success).data.id))
 
         }
-
     }
+
 }

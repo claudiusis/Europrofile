@@ -11,10 +11,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.europrofile.R
-import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentMainPageBinding
+import com.example.europrofile.domain.User
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
 import com.example.europrofile.ui.detailspage.DetailsViewModel
+import com.example.europrofile.ui.tabs.main.condition.CondTypeCard
 import com.example.europrofile.ui.tabs.main.condition.ConditionParentAdapter
 import com.example.europrofile.ui.tabs.main.condition.ConditionerViewModel
 import com.example.europrofile.ui.tabs.main.newsrecycler.Image
@@ -22,11 +23,14 @@ import com.example.europrofile.ui.tabs.main.newsrecycler.NewsAdapter
 import com.example.europrofile.ui.tabs.main.windowrecycler.ExamplesAdapter
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainPage : Fragment() {
 
     private lateinit var binding: FragmentMainPageBinding
+
+    private val viewModelUser : ProfileViewModel by activityViewModels()
 
     private lateinit var viewPager2: ViewPager2
     private lateinit var newsAdapter: NewsAdapter
@@ -36,8 +40,13 @@ class MainPage : Fragment() {
 
     private lateinit var conditionParentAdapter: ConditionParentAdapter
 
-    private val viewModelUser : ProfileViewModel by activityViewModels()
-    private val viewModelCond : ConditionerViewModel by activityViewModels()
+    @Inject
+    lateinit var viewModelAssistedFactory : ConditionerViewModel.Factory
+
+
+    private val viewModelCond : ConditionerViewModel by activityViewModels() {
+        ConditionerViewModel.provideFactory(viewModelAssistedFactory, User())
+    }
     private val detailsViewModel : DetailsViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -50,11 +59,11 @@ class MainPage : Fragment() {
 
         viewModelUser.getUserInfo(uid)
 
-        viewModelUser.userInfo.observe(viewLifecycleOwner){
+/*        viewModelUser.userInfo.observe(viewLifecycleOwner){
             if (it is RequestResult.Success) {
                 viewModelCond.getConditionType(it.data)
             }
-        }
+        }*/
 
         return binding.root
     }
@@ -113,7 +122,7 @@ class MainPage : Fragment() {
         binding.condRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         viewModelCond.condCard.observe(viewLifecycleOwner){
-            condAdapter.addItems(it.last())
+            condAdapter.addItems(it as ArrayList<CondTypeCard>)
         }
     }
 
