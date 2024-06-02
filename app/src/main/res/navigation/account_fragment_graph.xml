@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account_fragment_graph"
+    app:startDestination="@id/accountFragment">
+
+    <fragment
+        android:id="@+id/reviewCreationFragment"
+        android:name="com.example.europrofile.ui.reviewcreation.ReviewCreationFragment"
+        android:label="fragment_review_creation_fragment"
+        tools:layout="@layout/fragment_review_creation_fragment" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.europrofile.ui.tabs.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_reviewCreationFragment"
+            app:destination="@id/reviewCreationFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_contactInformationFragment"
+            app:destination="@id/contactInformationFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_myCommentsFragment"
+            app:destination="@id/myCommentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.europrofile.ui.accountpages.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/contactInformationFragment"
+        android:name="com.example.europrofile.ui.accountpages.contactinfo.ContactInformationFragment"
+        android:label="fragment_contact_information"
+        tools:layout="@layout/fragment_contact_information" />
+    <fragment
+        android:id="@+id/myCommentsFragment"
+        android:name="com.example.europrofile.ui.accountpages.mycomments.MyCommentsFragment"
+        android:label="MyCommentsFragment" />
+</navigation>

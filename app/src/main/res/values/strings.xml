@@ -27,7 +27,18 @@
     <string name="new_user_ask">Новый пользователь?</string>
     <string name="subtitle_login">Заполните поля или\n Войдите с помощью Google</string>
     <string name="choose_login_type">номер телефона/email</string>
+    <string name="district_1"><u>Заволжский р-он</u></string>
+    <string name="district_2"><u>Засвияжский р-он</u></string>
+    <string name="number_1"><u>+7 (902) 211 40-77</u></string>
+    <string name="number_2"><u>+7 (908) 479 17-17</u></string>
+    <string name="number_3"><u>+7 (908) 479 19-91</u></string>
+    <string name="short_number_1"><u>26-00-26</u></string>
+    <string name="short_number_2"><u>27-77-01</u></string>
+    <string name="short_number_3"><u>63-66-33</u></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="news">Новости</string>
+    <string name="see_all">Посмотреть всё</string>
+    <string name="parameters">Характеристики</string>
+    <string name="contact_info">ИНН 7328086844  ОГРН 1157325008631</string>
 </resources>

@@ -4,26 +4,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.europrofile.data.AuthResult
+import com.example.europrofile.data.RequestResult
+import com.example.europrofile.domain.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel: ViewModel() {
 
-    abstract val sendRequest : suspend (String, String) -> AuthResult
+    abstract suspend fun sendRequest(vararg args: String) : RequestResult<User>
 
-    private val _authState = MutableLiveData<AuthResult>()
-
-    val authState : LiveData<AuthResult> get() = _authState
-
-    fun sendCredentials(email: String, password: String) {
+    private val _authState = MutableLiveData<RequestResult<User>>()
+    val authState : LiveData<RequestResult<User>> get() = _authState
+    fun sendCredentials(vararg args: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
-            _authState.postValue(AuthResult.Loading)
-            sendRequest(email, password)
-            val result = sendRequest.invoke(email, password)
+            _authState.postValue(RequestResult.Loading)
+            val result = sendRequest(*args)
             _authState.postValue(result)
+
+
         }
 
     }
+
 }

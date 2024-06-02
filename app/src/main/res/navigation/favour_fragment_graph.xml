@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/favour_fragment_graph"
+    app:startDestination="@id/favouritesFragment">
+
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.example.europrofile.ui.tabs.favourites.FavouritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites" >
+        <action
+            android:id="@+id/action_favouritesFragment_to_detailsConditionerFragment2"
+            app:destination="@id/detailsConditionerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsConditionerFragment2"
+        android:name="com.example.europrofile.ui.detailspage.DetailsConditionerFragment"
+        android:label="fragment_details_conditioner"
+        tools:layout="@layout/fragment_details_conditioner" />
+</navigation>

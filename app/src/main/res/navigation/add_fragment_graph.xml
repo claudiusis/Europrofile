@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_fragment_graph"
+    app:startDestination="@id/makeOrderFragment">
+
+    <fragment
+        android:id="@+id/makeOrderFragment"
+        android:name="com.example.europrofile.ui.tabs.addorder.MakeOrderFragment"
+        android:label="fragment_make_order"
+        tools:layout="@layout/fragment_make_order" />
+</navigation>

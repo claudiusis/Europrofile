@@ -1,7 +1,13 @@
 package com.example.europrofile
 
-import androidx.multidex.MultiDexApplication
+import android.app.Application
+import com.yandex.mapkit.MapKitFactory
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class App: MultiDexApplication()
+class App: Application() {
+    override fun onCreate() {
+        super.onCreate()
+        MapKitFactory.setApiKey("980e699b-fa26-4fdd-b978-50b42ff90713")
+    }
+}

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray"
+        android:layout_marginBottom="200dp"
+        tools:context=".ui.reviewcreation.ReviewCreationFragment">
+
+        <TextView
+            android:id="@+id/review_creation_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Поделитесь впечатлениями"
+            android:fontFamily="@font/raleway_bold"
+            android:textSize="24dp"
+            android:layout_margin="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/comment_edit_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Комментарий"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="30dp"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_creation_title" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/review_creation_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/account_recycler"
+            android:gravity="top"
+            android:hint="Если не знаете, что написать - обратите внимание на подсказки ниже"
+            android:inputType="textMultiLine"
+            android:layout_margin="16dp"
+            android:padding="16dp"
+            android:minLines="5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comment_edit_title"/>
+
+
+        <TextView
+            android:id="@+id/review_creation_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/account_recycler"
+            android:padding="16dp"
+            android:text="Обслуживание • Персонал\n Качество установки"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_creation_input" />
+
+        <TextView
+            android:id="@+id/add_img_creation_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавьте фотографии"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_creation_hint"
+            app:layout_constraintBottom_toTopOf="@id/add_img_creation_title"
+            android:layout_margin="16dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/raleway_bold"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/photo_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fillViewport="true"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_img_creation_title">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/image_addition_review_creator_rv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="16dp"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_img_creation_title" />
+
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ImageButton
+            android:id="@+id/add_img_creation_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/add_icon_shape"
+            android:contentDescription="additionImg"
+            android:nestedScrollingEnabled="false"
+            android:padding="16dp"
+            android:src="@drawable/add_img"
+            app:layout_constraintTop_toBottomOf="@id/photo_scroll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:background="@drawable/roundedcontainer"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_img_creation_btn">
+
+            <Button
+                android:id="@+id/finish_review_creation_btn"
+                android:layout_width="match_parent"
+                android:layout_margin="16dp"
+                android:layout_height="wrap_content"
+                android:text="Оставиь отзыв"
+                android:textSize="18dp"
+                app:backgroundTint="@color/blue"
+                android:background="@drawable/buttons"
+                android:fontFamily="@font/raleway_medium"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:textAlignment="center"
+                android:textColor="#C7C7C7"
+                android:text="Проверьте отзыв перед отправкой: потм его нельзя будет поменять"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

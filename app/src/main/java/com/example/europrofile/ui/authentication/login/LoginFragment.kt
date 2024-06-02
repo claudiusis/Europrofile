@@ -1,5 +1,6 @@
 package com.example.europrofile.ui.authentication.login
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.europrofile.R
 import com.example.europrofile.core.ui.BaseFragment
-import com.example.europrofile.data.AuthResult
+import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,9 +30,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         viewModel.authState.observe(viewLifecycleOwner) {
             when(it) {
-                AuthResult.Loading -> binding.loading.visibility = View.VISIBLE
-                is AuthResult.Error -> binding.loading.visibility = View.GONE
-                is AuthResult.Success -> findNavController().navigate(R.id.action_loginFragment_to_mainPage)
+                RequestResult.Loading -> binding.loading.visibility = View.VISIBLE
+                is RequestResult.Error -> binding.loading.visibility = View.GONE
+                is RequestResult.Success -> {
+                    val editor = requireContext().getSharedPreferences("userinfo", Context.MODE_PRIVATE).edit()
+                    editor.putString("UID", it.data.id).apply()
+                    findNavController().navigate(R.id.action_loginFragment_to_tabsFragment)
+                }//findNavController().navigate(R.id.action_loginFragment_to_mainPage)
             }
         }
 
@@ -50,7 +55,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     companion object {
-
         fun newInstance() = LoginFragment()
     }
 }

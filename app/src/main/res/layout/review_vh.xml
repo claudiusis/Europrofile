@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:textAlignment="center"
+    android:layout_margin="8dp"
+    android:background="@drawable/account_recycler"
+    android:paddingBottom="15dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/basic_review_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/white_circle"
+        android:backgroundTint="#F5F5F5"
+        android:padding="8dp"
+        android:src="@drawable/account_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/review_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Имя комментатора"
+        android:layout_marginStart="8dp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/basic_review_avatar"
+        app:layout_constraintStart_toEndOf="@+id/basic_review_avatar"
+        app:layout_constraintTop_toTopOf="@+id/basic_review_avatar"/>
+
+    <TextView
+        android:id="@+id/review_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20:17, 18.03.2024"
+        android:textSize="12dp"
+        android:fontFamily="@font/poppins"
+        android:textColor="#7C7C7C"
+        app:layout_constraintStart_toStartOf="@id/review_owner"
+        app:layout_constraintTop_toBottomOf="@id/review_owner"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_date"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/review_images"
+        android:layout_width="match_parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_date"
+        android:orientation="horizontal"/>
+
+    <TextView
+        android:text="COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS COMMENTS "
+        android:textSize="14sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/poppins"
+        android:id="@+id/review_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_images"/>
+
+    <LinearLayout
+        android:id="@+id/like_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_description">
+
+        <ImageView
+            android:id="@+id/like_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="like"
+            android:foregroundTintMode="src_in"
+            android:src="@drawable/like"
+            app:tint="#7C7C7C"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <TextView
+            android:id="@+id/like_review_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="155"
+            android:textColor="#7C7C7C" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dislike_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        app:layout_constraintStart_toEndOf="@id/like_container"
+        app:layout_constraintTop_toBottomOf="@id/review_description">
+
+        <ImageView
+            android:id="@+id/dislike_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="like"
+            android:foregroundTintMode="src_in"
+            android:rotation="180"
+            android:src="@drawable/like"
+            app:tint="#7C7C7C"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <TextView
+            android:id="@+id/disLike_review_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="155"
+            android:textColor="#7C7C7C" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,44 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:fillViewport="true"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.MainPage"
-    android:background="#F5f5f5">
+    android:background="#FBFBFB"
+    tools:context=".ui.tabs.main.MainPage">
 
     <ImageView
         android:id="@+id/main_page_logo"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/img_1"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="110dp"
+        android:background="@drawable/img_1"
+        android:contentDescription="logo"
+        app:layout_constraintBottom_toTopOf="@+id/searcher"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <ImageButton
         android:id="@+id/notificBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        android:contentDescription="NotificationBtn" />
-
-    <EditText
-        android:id="@+id/searcher"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_page_logo"
-        android:autofillHints=""
-        android:inputType="text"
-        android:layout_marginTop="35dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:background="@drawable/white_circle"
+        android:contentDescription="NotificationBtn"
+        android:padding="8dp"
+        android:src="@drawable/notification_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <SearchView
+        android:id="@+id/searcher"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
+        android:autofillHints=""
+        android:iconifiedByDefault="false"
+        android:background="@drawable/input"
+        app:queryBackground="@android:color/transparent"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Найти товар"
+        app:iconifiedByDefault="false"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_page_logo" />
 
     <LinearLayout
         android:id="@+id/news_title"
@@ -47,43 +66,190 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searcher">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/news"
             android:layout_weight="1"
-            android:paddingStart="10dp"/>
+            style="@style/mainPageTitles"
+            android:textSize="16dp"
+            android:paddingStart="10dp"
+            android:text="@string/news"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Посмотреть всё"
             android:layout_weight="1"
+            android:paddingEnd="8dp"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/blue"
+            android:text="@string/see_all"
             android:textAlignment="textEnd"
-            android:paddingEnd="8dp"/>
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/news_rv"
-        android:layout_marginTop="8dp"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/news_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/news_title"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/news_title" />
 
     <TextView
+        android:id="@+id/category_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/news_rv"
-        android:text="Выберите категорию"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="20dp"/>
+        style="@style/mainPageTitles"
+        android:textSize="16dp"
+        android:text="Выберите категорию"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/news_pager" />
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:tabBackground="@drawable/tab_selector"
+        android:background="@android:color/transparent"
+        app:tabIndicator="@null"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/category_title">
+
+            <com.google.android.material.tabs.TabItem
+                android:text="Все товары"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+            <com.google.android.material.tabs.TabItem
+                android:text="Окна"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+            <com.google.android.material.tabs.TabItem
+                android:text="Кондиционеры"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <LinearLayout
+        android:id="@+id/windLayout"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/condLayout"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/mainPageTitles"
+            android:textSize="20dp"
+            android:text="Окна"
+            android:layout_weight="1"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/window_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/work_examples"
+            android:layout_width="match_parent"
+            android:paddingBottom="100dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/windLayout"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/condLayout"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/mainPageTitles"
+            android:textSize="20dp"
+            android:text="Кондиционеры"
+            android:layout_weight="1"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_condition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:tabBackground="@drawable/tab_selector"
+            android:background="@android:color/transparent"
+            app:tabIndicator="@null"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/black" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cond_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+<!--    <LinearLayout
+        android:id="@+id/sheathingLayout"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/condLayout"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/mainPageTitles"
+            android:textSize="20dp"
+            android:text="Обшивка"
+            android:layout_weight="1"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sheath_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
