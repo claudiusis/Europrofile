@@ -35,6 +35,12 @@
     <string name="short_number_1"><u>26-00-26</u></string>
     <string name="short_number_2"><u>27-77-01</u></string>
     <string name="short_number_3"><u>63-66-33</u></string>
+
+    <string name="slogan_info">
+        Аккуратно, чисто и в срок <font color='#0D6EFD'> установим пластиковые окна </font> с гарантией 5 лет
+    </string>
+    <string name="slogan_plus">и бесплатным cервисным обслуживанием 2 года</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="news">Новости</string>

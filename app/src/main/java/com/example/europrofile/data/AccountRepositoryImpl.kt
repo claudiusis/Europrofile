@@ -6,6 +6,11 @@ import com.example.europrofile.domain.AccountRepository
 import com.example.europrofile.domain.User
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -44,6 +49,9 @@ class AccountRepositoryImpl @Inject constructor(private val firestore: FirebaseF
                 FireBaseTags.COUNT_OF_REVIEWS_CHANGES -> firestore.collection(FireBaseTags.USERS).document(user.id).update("countOfReviews",
                     user.countOfReviews
                 )
+                FireBaseTags.LIKES -> {
+                    firestore.collection(FireBaseTags.USERS).document(user.id).update("listOfFavourites", user.listOfFavourites)
+                }
             }
             RequestResult.Success(user)
         } catch (e: Exception){
@@ -51,4 +59,25 @@ class AccountRepositoryImpl @Inject constructor(private val firestore: FirebaseF
         }
 
     }
+
+    override suspend fun subscribeToUser(uid: String) : Flow<RequestResult<User>> =
+        callbackFlow {
+            val document = firestore.collection(FireBaseTags.USERS).document(uid)
+            val listener = document.addSnapshotListener { value, error ->
+
+                error?.let {
+                    return@addSnapshotListener
+                }
+
+                try {
+                    val user = value?.toObject(User::class.java) ?: throw Exception("Error of db")
+                    trySend(RequestResult.Success(user))
+                } catch (e : Exception) {
+                    trySend(RequestResult.Error(e))
+                }
+            }
+            awaitClose {
+                listener.remove()
+            }
+        }.flowOn(Dispatchers.IO)
 }

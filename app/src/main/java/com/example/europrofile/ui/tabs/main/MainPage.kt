@@ -5,14 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.europrofile.R
+import com.example.europrofile.core.ui.PositionViewModel
+import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentMainPageBinding
-import com.example.europrofile.domain.User
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
 import com.example.europrofile.ui.detailspage.DetailsViewModel
 import com.example.europrofile.ui.tabs.main.condition.CondTypeCard
@@ -23,7 +25,6 @@ import com.example.europrofile.ui.tabs.main.newsrecycler.NewsAdapter
 import com.example.europrofile.ui.tabs.main.windowrecycler.ExamplesAdapter
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainPage : Fragment() {
@@ -38,15 +39,7 @@ class MainPage : Fragment() {
     private lateinit var newsList: ArrayList<Image>
     private lateinit var exampleAdapter: ExamplesAdapter
 
-    private lateinit var conditionParentAdapter: ConditionParentAdapter
-
-    @Inject
-    lateinit var viewModelAssistedFactory : ConditionerViewModel.Factory
-
-
-    private val viewModelCond : ConditionerViewModel by activityViewModels() {
-        ConditionerViewModel.provideFactory(viewModelAssistedFactory, User())
-    }
+    private val viewModelCond : ConditionerViewModel by activityViewModels()
     private val detailsViewModel : DetailsViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -55,22 +48,20 @@ class MainPage : Fragment() {
     ): View {
         binding = FragmentMainPageBinding.inflate(layoutInflater)
 
-        val uid = requireContext().getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("UID", "-1")?:"-1"
-
-        viewModelUser.getUserInfo(uid)
-
-/*        viewModelUser.userInfo.observe(viewLifecycleOwner){
-            if (it is RequestResult.Success) {
-                viewModelCond.getConditionType(it.data)
-            }
-        }*/
-
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mainPageScroll.scrollY = PositionViewModel.mainPagePosition
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val uid = activity?.getSharedPreferences("userinfo", Context.MODE_PRIVATE)?.getString("UID", "-1")?:"-1"
+        viewModelUser.getUserInfo(uid)
 
         viewPager2 = binding.newsPager
         newsAdapter = NewsAdapter(makeNews(), viewPager2)
@@ -111,19 +102,76 @@ class MainPage : Fragment() {
             }
         })
 
+        viewModelCond.condCard.value.let {
+
+            binding.tabLayoutCondition.removeAllTabs()
+
+            viewModelCond.condCard.value?.forEach {
+                val newTab = binding.tabLayoutCondition.newTab()
+                val text = it.title.substring(it.title.indexOf(" ") + 1)
+                newTab.text = text
+                binding.tabLayoutCondition.addTab(
+                    newTab
+                )
+            }
+
+        }
+
+
 
         val condAdapter = ConditionParentAdapter(arrayListOf(), { link, imgList ->
             detailsViewModel.getData(link, imgList)
             findNavController().navigate(R.id.action_mainPage_to_detailsConditionerFragment)
         }, { elem ->
-            viewModelCond.addFavourites(elem)
-        })
+            val user = (viewModelUser.userInfo.value as RequestResult.Success).data
+            if (user.listOfFavourites.find { elem.title==it }!=null) {
+                user.listOfFavourites.remove(elem.title)
+            } else {
+                user.listOfFavourites.add(elem.title)
+            }
+            viewModelUser.changeInfo(user, "Likes")
+        },
+            { image, condit ->
+                if (viewModelCond.favourites.value?.contains(condit) == true){
+                    image.background = ContextCompat.getDrawable(requireContext(), R.drawable.favourite_fill_icon)
+                } else {
+                    image.background = ContextCompat.getDrawable(requireContext(), R.drawable.favourite_icon)
+                }
+
+            })
         binding.condRecycler.adapter = condAdapter
         binding.condRecycler.layoutManager = LinearLayoutManager(requireContext())
 
+        viewModelCond.favourites.observe(viewLifecycleOwner){
+            condAdapter.addItems(viewModelCond.condCard.value as ArrayList<CondTypeCard>)
+        }
+
+        viewModelUser.userInfo.observe(viewLifecycleOwner){
+            if (it is RequestResult.Success) {
+                viewModelCond.refactorFavourites(it.data)
+            }
+        }
+
         viewModelCond.condCard.observe(viewLifecycleOwner){
             condAdapter.addItems(it as ArrayList<CondTypeCard>)
+
+            val newTab = binding.tabLayoutCondition.newTab()
+            val text = it.last().title.substring(it.last().title.indexOf(" ")+1)
+            newTab.text = text
+            binding.tabLayoutCondition.addTab(
+                newTab
+            )
+
+            if (viewModelUser.userInfo.value is RequestResult.Success) {
+                viewModelCond.refactorFavourites((viewModelUser.userInfo.value as RequestResult.Success).data)
+            }
         }
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        PositionViewModel.mainPagePosition = binding.mainPageScroll.scrollY
     }
 
 

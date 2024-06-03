@@ -31,6 +31,12 @@ class TabsFragment : Fragment() {
 
         val navHost = childFragmentManager.findFragmentById(R.id.fragment_tabs_container) as NavHost
         val navController = navHost.navController
+
+/*        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
+            Log.d("QWERTY", menuItem.itemId.toString())
+            false
+        }*/
+
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
 
         binding.FAB.setOnClickListener {

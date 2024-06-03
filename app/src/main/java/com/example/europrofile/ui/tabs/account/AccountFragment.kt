@@ -1,5 +1,6 @@
 package com.example.europrofile.ui.tabs.account
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +10,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.europrofile.R
+import com.example.europrofile.core.ui.findTopNavController
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentAccountBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
@@ -86,6 +89,17 @@ class AccountFragment : Fragment() {
                 "Написать отзыв" -> findNavController().navigate(R.id.action_accountFragment_to_reviewCreationFragment)
                 "Контакты" -> findNavController().navigate(R.id.action_accountFragment_to_contactInformationFragment)
                 "Мои отзывы" -> findNavController().navigate(R.id.action_accountFragment_to_myCommentsFragment)
+                "О компании" -> findNavController().navigate(R.id.action_accountFragment_to_aboutUsFragment)
+                "Выйти из аккаунта" -> {
+                    viewModel.logOut()
+                    val editor = requireContext().getSharedPreferences("userinfo", Context.MODE_PRIVATE).edit()
+                    editor.remove("UID").apply()
+                    findTopNavController().navigate(R.id.action_tabsFragment_to_loginFragment, null, navOptions {
+                        popUpTo(R.id.tabsFragment){
+                            inclusive = true
+                        }
+                    })
+                }
             }
         }, recyclerList)
         recycler.adapter = adapter
@@ -101,7 +115,6 @@ class AccountFragment : Fragment() {
         val settingsList2 = ArrayList<ChildItem>()
         settingsList2.add(ChildItem("О компании", R.drawable.baseline_arrow_forward_ios_24))
         settingsList2.add(ChildItem("Контакты", R.drawable.baseline_arrow_forward_ios_24))
-        settingsList2.add(ChildItem("О приложении", R.drawable.baseline_arrow_forward_ios_24))
         settingsList2.add(ChildItem("Выйти из аккаунта", R.drawable.baseline_arrow_forward_ios_24))
         recyclerList.add(ParentItem("Дополнительно", settingsList2))
     }

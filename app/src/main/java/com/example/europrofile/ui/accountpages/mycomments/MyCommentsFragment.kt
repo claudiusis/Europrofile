@@ -13,7 +13,7 @@ import com.example.europrofile.R
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentMyCommentsBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
-import com.example.europrofile.ui.reviewcreation.ReviewViewModel
+import com.example.europrofile.ui.accountpages.reviewcreation.ReviewViewModel
 import com.example.europrofile.ui.tabs.comments.recycler.ReviewAdapter
 import com.example.europrofile.ui.tabs.comments.recycler.ViewReview
 import dagger.hilt.android.AndroidEntryPoint

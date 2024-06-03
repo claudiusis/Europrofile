@@ -12,10 +12,11 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.europrofile.R
 import com.example.europrofile.core.ui.RecyclerDiffUtil
 
-class ConditionChildAdapter(private var listOfCondition : List<Conditioner> = listOf(), private val clickFunc : (link: String, imgList : List<String>)->Unit, private val clickLike : (elem : Conditioner)->Unit) : RecyclerView.Adapter<ConditionChildAdapter.ConditionChildVH>()  {
+class ConditionChildAdapter(private var listOfCondition : List<Conditioner> = listOf(), private val clickFunc : (link: String, imgList : List<String>)->Unit, private val clickLike : (elem : Conditioner)->Unit,
+    private val check : (item: ImageButton, conditioner : Conditioner)->Unit) : RecyclerView.Adapter<ConditionChildAdapter.ConditionChildVH>()  {
 
     fun refactorList(newList : List<Conditioner>){
-        val callback = RecyclerDiffUtil<Conditioner>(listOfCondition, newList,{
+        val callback = RecyclerDiffUtil(listOfCondition, newList,{
             old, new -> old == new
         }, { old, new -> old.title==new.title })
         listOfCondition = newList
@@ -47,6 +48,8 @@ class ConditionChildAdapter(private var listOfCondition : List<Conditioner> = li
                 clickFunc.invoke(item.pageLink, item.img)
             }
 
+            check(like, item)
+
             like.setOnClickListener {
                 clickLike.invoke(item)
             }
@@ -66,5 +69,6 @@ class ConditionChildAdapter(private var listOfCondition : List<Conditioner> = li
             images.setImageList(imageList)
 
         }
+
     }
 }

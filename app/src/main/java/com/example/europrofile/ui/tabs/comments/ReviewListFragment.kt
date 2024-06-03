@@ -14,7 +14,7 @@ import com.example.europrofile.R
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentReviewListBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
-import com.example.europrofile.ui.reviewcreation.ReviewViewModel
+import com.example.europrofile.ui.accountpages.reviewcreation.ReviewViewModel
 import com.example.europrofile.ui.tabs.comments.recycler.ReviewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 

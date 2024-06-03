@@ -3,27 +3,22 @@ package com.example.europrofile.ui.tabs.main.condition
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.europrofile.R
 
-class ConditionParentAdapter(private val listOfCondTypes : ArrayList<CondTypeCard> = arrayListOf(), private val clickFunc : (link: String, imgList : List<String>)->Unit, private val clickLike : (elem: Conditioner)->Unit): RecyclerView.Adapter<ConditionParentAdapter.ConditionParentVH>() {
+class ConditionParentAdapter(private val listOfCondTypes : ArrayList<CondTypeCard> = arrayListOf(), private val clickFunc : (link: String, imgList : List<String>)->Unit, private val clickLike : (elem: Conditioner)->Unit, private val check : (item: ImageButton, conditioner : Conditioner)->Unit): RecyclerView.Adapter<ConditionParentAdapter.ConditionParentVH>() {
 
     fun addItems(items : ArrayList<CondTypeCard>){
-/*        val callback = RecyclerDiffUtil<CondTypeCard>(
-            listOfCondTypes, items, {
-                old, new -> old.title==new.title
-            }
-        )
-        listOfCondTypes.clear()
-        listOfCondTypes.addAll(items)
-        val result = DiffUtil.calculateDiff(callback)
-        result.dispatchUpdatesTo(this)*/
         listOfCondTypes.clear()
         listOfCondTypes.addAll(items)
         notifyDataSetChanged()
     }
+
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConditionParentVH {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -34,7 +29,7 @@ class ConditionParentAdapter(private val listOfCondTypes : ArrayList<CondTypeCar
         holder.title.text = listOfCondTypes[position].title
 
         holder.recycler.layoutManager = GridLayoutManager(holder.itemView.context, 2)
-        holder.recycler.adapter = ConditionChildAdapter(listOfCondTypes[position].condList, clickFunc, clickLike)
+        holder.recycler.adapter = ConditionChildAdapter(listOfCondTypes[position].condList, clickFunc, clickLike, check)
     }
 
     override fun getItemCount(): Int = listOfCondTypes.size

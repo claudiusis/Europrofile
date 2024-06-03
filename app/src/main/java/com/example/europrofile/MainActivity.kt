@@ -10,7 +10,7 @@ import com.example.europrofile.core.FireBaseTags
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.ActivityMainBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
-import com.example.europrofile.ui.reviewcreation.ReviewViewModel
+import com.example.europrofile.ui.accountpages.reviewcreation.ReviewViewModel
 import com.yandex.mapkit.MapKitFactory
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,9 +26,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        uid = this.getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("UID", "-1")?:"-1"
 
-        viewModelProfile.getUserInfo(uid)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -40,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val inflater = navHost.navController.navInflater
-        val graph = inflater.inflate(R.navigation.test_navig)
+        val graph = inflater.inflate(R.navigation.main_navigation_graph)
 
 
         val sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE)
@@ -48,6 +46,8 @@ class MainActivity : AppCompatActivity() {
             graph.setStartDestination(R.id.loginFragment)
         } else {
             graph.setStartDestination(R.id.tabsFragment)
+            uid = this.getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("UID", "-1")?:"-1"
+            viewModelProfile.getUserInfo(uid)
         }
 
         navHost.navController.graph = graph
@@ -62,5 +62,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+/*        viewModelProfile.userInfo.observe(this){
+            uid = this.getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("UID", "-1")?:"-1"
+            viewModelProfile.getUserInfo(uid)
+        }*/
     }
 }
