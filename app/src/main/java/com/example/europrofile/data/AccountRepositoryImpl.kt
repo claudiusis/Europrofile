@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AccountRepositoryImpl @Inject constructor(private val firestore: FirebaseFirestore, private val storage: StorageReference): AccountRepository {
@@ -51,6 +52,23 @@ class AccountRepositoryImpl @Inject constructor(private val firestore: FirebaseF
                 )
                 FireBaseTags.LIKES -> {
                     firestore.collection(FireBaseTags.USERS).document(user.id).update("listOfFavourites", user.listOfFavourites)
+                }
+                else -> {
+                    if (user.imgUri?.isNotEmpty()==true){
+                        val result = withContext(Dispatchers.IO){
+                            loadImg(Uri.parse(user.imgUri))
+                        }
+                        if (result is RequestResult.Error){
+                            throw Exception("Load exception")
+                        } else {
+                            user.imgUri = (result as RequestResult.Success).data.toString()
+
+                            firestore.collection(FireBaseTags.USERS).document(user.id).set(
+                                user
+                            ).await()
+                        }
+
+                    }
                 }
             }
             RequestResult.Success(user)

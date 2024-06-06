@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            tools:context=".ui.accountpages.profile.ProfileFragment">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back_arrow"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/profile_title"
+                app:layout_constraintBottom_toBottomOf="@id/profile_title"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:id="@+id/profile_title"
+                android:text="Редактирование профиля"
+                style="@style/textTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+            <RelativeLayout
+                android:id="@+id/profile_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_title">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/avatar_icon"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_margin="20dp"
+                    android:background="@color/blue"
+                    app:shapeAppearanceOverlay="@style/circleImageView" />
+
+                <TextView
+                    android:id="@+id/icon_text"
+                    android:fontFamily="@font/raleway_semibold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"
+                    android:textSize="42dp"
+                    android:text="NS"/>
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Имя Фамилия"
+                android:background="@null"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_img" />
+
+            <TextView
+                android:id="@+id/profile_info_title1"
+                android:text="Номер телефона"
+                android:fontFamily="@font/raleway_semibold"
+                android:textSize="16sp"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_name"/>
+
+            <EditText
+                android:id="@+id/profile_info1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input"
+                android:fontFamily="@font/poppins"
+                android:padding="17dp"
+                android:text="+7 (999) 66-88"
+                android:textColor="#2B2B2B"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_info_title1"/>
+
+            <TextView
+                android:id="@+id/profile_info_title2"
+                android:text="Почта"
+                android:fontFamily="@font/raleway_semibold"
+                android:textSize="16sp"
+                android:layout_marginTop="16sp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_info1"/>
+
+            <TextView
+                android:id="@+id/profile_info2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input"
+                android:fontFamily="@font/poppins"
+                android:padding="17dp"
+                android:text="example@mail.ru"
+                android:textColor="#2B2B2B"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_info_title2"/>
+
+            <TextView
+                android:id="@+id/profile_info_title3"
+                android:text="Адрес"
+                android:fontFamily="@font/raleway_semibold"
+                android:textSize="16sp"
+                android:layout_marginTop="16sp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_info2"/>
+
+            <EditText
+                android:id="@+id/profile_info3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input"
+                android:fontFamily="@font/poppins"
+                android:padding="17dp"
+                android:text="Москва"
+                android:textColor="#2B2B2B"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_info_title3"/>
+
+            <ImageButton
+                android:id="@+id/locarion"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_location"
+                app:layout_constraintEnd_toEndOf="@id/profile_info3"
+                app:layout_constraintTop_toTopOf="@id/profile_info3"
+                app:layout_constraintBottom_toBottomOf="@id/profile_info3"/>
+
+            <TextView
+                android:id="@+id/profile_info_title4"
+                android:text="Пароль"
+                android:fontFamily="@font/raleway_semibold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_info3"/>
+
+            <TextView
+                android:id="@+id/profile_info4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input"
+                android:fontFamily="@font/poppins"
+                android:padding="17dp"
+                android:text="••••••••••••"
+                android:textColor="#2B2B2B"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_info_title4"/>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/buttons"
+                android:text="Сохранить изменения"
+                app:backgroundTint="@color/blue"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="120dp"
+                app:layout_constraintTop_toBottomOf="@id/profile_info4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

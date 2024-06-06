@@ -19,7 +19,6 @@ class ConditionParentAdapter(private val listOfCondTypes : ArrayList<CondTypeCar
 
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConditionParentVH {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ConditionParentVH(layoutInflater.inflate(R.layout.cond_parent_vh, parent, false))

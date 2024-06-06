@@ -38,7 +38,11 @@
         android:id="@+id/profileFragment"
         android:name="com.example.europrofile.ui.accountpages.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_profileChangeFragment"
+            app:destination="@id/profileChangeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/contactInformationFragment"
         android:name="com.example.europrofile.ui.accountpages.contactinfo.ContactInformationFragment"
@@ -57,4 +61,8 @@
         android:name="com.example.europrofile.ui.accountpages.myorders.MyOrdersFragment"
         android:label="fragment_my_orders"
         tools:layout="@layout/fragment_my_orders" />
+    <fragment
+        android:id="@+id/profileChangeFragment"
+        android:name="com.example.europrofile.ui.accountpages.profile.ProfileChangeFragment"
+        android:label="ProfileChangeFragment" />
 </navigation>

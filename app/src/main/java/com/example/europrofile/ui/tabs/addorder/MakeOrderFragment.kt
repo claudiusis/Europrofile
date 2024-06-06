@@ -1,13 +1,18 @@
 package com.example.europrofile.ui.tabs.addorder
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.os.Parcel
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.europrofile.MainActivity
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentMakeOrderBinding
 import com.example.europrofile.domain.Order
@@ -119,6 +124,12 @@ class MakeOrderFragment : Fragment() {
             }
         }
 
+        binding.myLocationIcon.setOnClickListener {
+
+            getLocation()
+
+        }
+
         binding.button.setOnClickListener {
             val order = Order(
                 user.id+user.countOfOrders,
@@ -141,5 +152,28 @@ class MakeOrderFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
+
+    fun getLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        val task = (activity as MainActivity).fusedLocationServices.lastLocation
+
+        task.addOnSuccessListener {
+            if (it!=null){
+                val geocoder = Geocoder(requireContext())
+                val address = geocoder.getFromLocation(it.latitude, it.longitude, 1)
+                binding.editTextAddress.setText(address!!.get(0).getAddressLine(0))
+            }
+        }
+    }
+
 
 }
