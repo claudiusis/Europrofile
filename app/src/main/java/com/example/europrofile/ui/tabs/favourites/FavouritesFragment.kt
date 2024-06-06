@@ -60,6 +60,15 @@ class FavouritesFragment : Fragment() {
 
         favouritesViewModel.favourites.observe(viewLifecycleOwner){
             adapter.refactorList(it)
+
+            if (it.isEmpty()){
+                binding.emptyImg.visibility = View.VISIBLE
+                binding.emptyText.visibility = View.VISIBLE
+            } else {
+                binding.emptyImg.visibility = View.GONE
+                binding.emptyText.visibility = View.GONE
+            }
+
         }
 
     }

@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_accountFragment_to_aboutUsFragment"
             app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -49,4 +52,9 @@
         android:id="@+id/aboutUsFragment"
         android:name="com.example.europrofile.ui.accountpages.info.AboutUsFragment"
         android:label="AboutUsFragment" />
+    <fragment
+        android:id="@+id/myOrdersFragment"
+        android:name="com.example.europrofile.ui.accountpages.myorders.MyOrdersFragment"
+        android:label="fragment_my_orders"
+        tools:layout="@layout/fragment_my_orders" />
 </navigation>

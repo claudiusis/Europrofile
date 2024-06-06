@@ -72,7 +72,17 @@ class MyCommentsFragment : Fragment() {
 
         chatsViewModel.reviewGetState.observe(viewLifecycleOwner){
 
-            adapter.changeList(chatsViewModel.getUserReviews((user.userInfo.value as RequestResult.Success).data.id))
+            val myList = chatsViewModel.getUserReviews((user.userInfo.value as RequestResult.Success).data.id)
+
+            adapter.changeList(myList)
+
+            if (myList.isEmpty()){
+                binding.emptyImg.visibility = View.VISIBLE
+                binding.emptyText.visibility = View.VISIBLE
+            } else {
+                binding.emptyImg.visibility = View.GONE
+                binding.emptyText.visibility = View.GONE
+            }
 
         }
     }

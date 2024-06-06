@@ -86,6 +86,7 @@ class AccountFragment : Fragment() {
         val adapter = ParentAdapter({
                 title  ->
             when (title) {
+                "Записи на замер" -> findNavController().navigate(R.id.action_accountFragment_to_myOrdersFragment)
                 "Написать отзыв" -> findNavController().navigate(R.id.action_accountFragment_to_reviewCreationFragment)
                 "Контакты" -> findNavController().navigate(R.id.action_accountFragment_to_contactInformationFragment)
                 "Мои отзывы" -> findNavController().navigate(R.id.action_accountFragment_to_myCommentsFragment)
