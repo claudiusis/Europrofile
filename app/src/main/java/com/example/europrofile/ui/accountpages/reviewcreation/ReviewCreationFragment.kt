@@ -1,7 +1,6 @@
-package com.example.europrofile.ui.reviewcreation
+package com.example.europrofile.ui.accountpages.reviewcreation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,13 +22,13 @@ class ReviewCreationFragment : Fragment() {
 
     private lateinit var binding: FragmentReviewCreationFragmentBinding
     private lateinit var recyclerView: RecyclerView
-    private val reviewViewModel : ReviewViewModel by activityViewModels()
-    private val userInfo : ProfileViewModel by activityViewModels()
+    private val reviewViewModel: ReviewViewModel by activityViewModels()
+    private val userInfo: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentReviewCreationFragmentBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -40,10 +39,11 @@ class ReviewCreationFragment : Fragment() {
         recyclerView = binding.imageAdditionReviewCreatorRv
         val adapter = ReviewImgAdapter()
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         val resultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            if (it!=null) {
+            if (it != null) {
                 adapter.addImg(it)
             }
         }
@@ -52,45 +52,33 @@ class ReviewCreationFragment : Fragment() {
             resultLauncher.launch("image/*")
         }
 
-        binding.finishReviewCreationBtn.setOnClickListener{
+        binding.finishReviewCreationBtn.setOnClickListener {
 
             val userData = (userInfo.userInfo.value as RequestResult.Success).data
 
             val stringUri = mutableListOf<String>()
             adapter.imgList.forEach { stringUri.add(it.toString()) }
 
-            val review = Review(
-                userData.id + "-" + userData.countOfReviews.toString(),
-                (userInfo.userInfo.value as RequestResult.Success).data.id,
-                Date(),
-                stringUri,
-                binding.reviewCreationInput.text.toString(),
-                mutableListOf(),
-                mutableListOf()
-            )
+            if (binding.reviewCreationInput.text!!.isEmpty()){
+                //
+            } else {
+                val review = Review(
+                    userData.id + "-" + userData.countOfReviews.toString(),
+                    (userInfo.userInfo.value as RequestResult.Success).data.id,
+                    Date(),
+                    stringUri,
+                    binding.reviewCreationInput.text.toString(),
+                    mutableListOf(),
+                    mutableListOf()
+                )
 
-            reviewViewModel.addReview(
-                review
-            )
+                reviewViewModel.addReview(
+                    review
+                )
 
-        }
-
-        reviewViewModel.reviewSetState.observe(viewLifecycleOwner){
-            when(it){
-                is  RequestResult.Success -> {
-                    findNavController().popBackStack()
-                }
-                is RequestResult.Loading -> {
-                    Log.i("QWERTY", "Loading")
-                }
-                else -> {
-                    Log.i("QWERTY", (it as RequestResult.Error).e.toString())
-                }
+                findNavController().popBackStack()
             }
+
         }
-
-
-
     }
-
 }

@@ -84,7 +84,9 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
     implementation("com.google.firebase:firebase-firestore:24.11.0")
 
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // Hilt
     val hiltVersion = "2.44.2"

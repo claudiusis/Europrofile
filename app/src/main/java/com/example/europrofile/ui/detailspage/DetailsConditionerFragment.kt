@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.europrofile.R
 import com.example.europrofile.databinding.FragmentDetailsConditionerBinding
 import com.example.europrofile.ui.detailspage.inforecycler.DetailsInfoCondAdapter
+import com.example.europrofile.ui.tabs.account.recycler.MyDecorator
 
 class DetailsConditionerFragment : Fragment() {
 
@@ -51,6 +54,9 @@ class DetailsConditionerFragment : Fragment() {
         pageViewModel.info.observe(viewLifecycleOwner){
 
             binding.detailsRv.adapter = DetailsInfoCondAdapter(it)
+            val itemDecorator = MyDecorator()
+            itemDecorator.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divide_line)!!)
+            binding.detailsRv.addItemDecoration(itemDecorator)
 
         }
 

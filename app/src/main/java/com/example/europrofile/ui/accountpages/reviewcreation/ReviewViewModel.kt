@@ -1,4 +1,4 @@
-package com.example.europrofile.ui.reviewcreation
+package com.example.europrofile.ui.accountpages.reviewcreation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,9 +24,6 @@ class ReviewViewModel @Inject constructor(private val repository: ReviewReposito
 
     private val _reviewSetState = MutableLiveData<RequestResult<Review>>()
     val reviewSetState: LiveData<RequestResult<Review>> = _reviewSetState
-
-    private val _userReviews = MutableLiveData<RequestResult<List<ViewReview>>>()
-    val userReviews : LiveData<RequestResult<List<ViewReview>>> = _userReviews
 
     init {
         viewModelScope.launch(Dispatchers.IO){

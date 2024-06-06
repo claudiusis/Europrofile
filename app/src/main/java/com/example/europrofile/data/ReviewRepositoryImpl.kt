@@ -47,15 +47,6 @@ class ReviewRepositoryImpl @Inject constructor(private val firestore: FirebaseFi
         }
     }
 
-
-/*    val viewReview = it.toObject(Review::class.java)
-
-    CoroutineScope(Dispatchers.IO).launch {
-
-        val user = firestore.collection(FireBaseTags.USERS).document(viewReview?.idOfUSer?:"").get().await()
-
-    }*/
-
     override suspend fun subscribePostChanges() : Flow<RequestResult<List<ViewReview>>> =
         callbackFlow {
             val collection = firestore.collection(FireBaseTags.REVIEWS_STORAGE).orderBy("date", Query.Direction.DESCENDING)

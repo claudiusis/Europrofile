@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.example.europrofile.R
 import com.example.europrofile.core.ui.BaseFragment
 import com.example.europrofile.data.RequestResult
@@ -38,11 +39,15 @@ class RegisterFragment : BaseFragment<FragmentRegistrBinding>() {
                     val editor = requireContext().getSharedPreferences("userinfo", Context.MODE_PRIVATE).edit()
                     editor.putString("UID", it.data.id).apply()
                     Log.i("QWERTY", "All normal")
-                    findNavController().navigate(R.id.action_registerFragment_to_tabsFragment)
-                } // findNavController().navigate(R.id.action_registerFragment_to_mainPage)
+                    findNavController().navigate(R.id.action_registerFragment_to_tabsFragment, null, navOptions {
+                        popUpTo(R.id.registerFragment){
+                            inclusive = true
+                        }
+                    })
+                }
                 is RequestResult.Error -> {
                     binding.loading.visibility = View.GONE
-                    Log.i("QWERTY", it.e.localizedMessage.toString())
+                    it.e.localizedMessage?.let { it1 -> Log.i("QWERTY", it1.toString()) }
                 }
             }
         }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/reviewCreationFragment"
-        android:name="com.example.europrofile.ui.reviewcreation.ReviewCreationFragment"
+        android:name="com.example.europrofile.ui.accountpages.reviewcreation.ReviewCreationFragment"
         android:label="fragment_review_creation_fragment"
         tools:layout="@layout/fragment_review_creation_fragment" />
     <fragment
@@ -27,12 +27,22 @@
         <action
             android:id="@+id/action_accountFragment_to_myCommentsFragment"
             app:destination="@id/myCommentsFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.europrofile.ui.accountpages.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_profileChangeFragment"
+            app:destination="@id/profileChangeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/contactInformationFragment"
         android:name="com.example.europrofile.ui.accountpages.contactinfo.ContactInformationFragment"
@@ -42,4 +52,17 @@
         android:id="@+id/myCommentsFragment"
         android:name="com.example.europrofile.ui.accountpages.mycomments.MyCommentsFragment"
         android:label="MyCommentsFragment" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.europrofile.ui.accountpages.info.AboutUsFragment"
+        android:label="AboutUsFragment" />
+    <fragment
+        android:id="@+id/myOrdersFragment"
+        android:name="com.example.europrofile.ui.accountpages.myorders.MyOrdersFragment"
+        android:label="fragment_my_orders"
+        tools:layout="@layout/fragment_my_orders" />
+    <fragment
+        android:id="@+id/profileChangeFragment"
+        android:name="com.example.europrofile.ui.accountpages.profile.ProfileChangeFragment"
+        android:label="ProfileChangeFragment" />
 </navigation>

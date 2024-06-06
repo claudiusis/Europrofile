@@ -96,7 +96,7 @@
             android:fontFamily="@font/poppins_medium"
             android:paddingEnd="14dp"
             android:paddingBottom="16dp"
-            android:hint="@string/enter_name"
+            android:hint="Введите номер телефона"
             android:minHeight="48dp"
             android:inputType="phone"
             tools:ignore="LabelFor" />
@@ -207,6 +207,7 @@
     <com.google.android.gms.common.SignInButton
         android:id="@+id/google_reg_btn"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"

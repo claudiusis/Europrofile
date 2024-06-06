@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.example.europrofile.R
 import com.example.europrofile.core.ui.BaseFragment
 import com.example.europrofile.data.RequestResult
@@ -35,8 +36,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 is RequestResult.Success -> {
                     val editor = requireContext().getSharedPreferences("userinfo", Context.MODE_PRIVATE).edit()
                     editor.putString("UID", it.data.id).apply()
-                    findNavController().navigate(R.id.action_loginFragment_to_tabsFragment)
-                }//findNavController().navigate(R.id.action_loginFragment_to_mainPage)
+                    findNavController().navigate(R.id.action_loginFragment_to_tabsFragment, null, navOptions {
+                        popUpTo(R.id.loginFragment){
+                            inclusive = true
+                        }
+                    })
+                }
             }
         }
 

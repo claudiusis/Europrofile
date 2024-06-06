@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="@color/light_gray"
         android:layout_marginBottom="200dp"
-        tools:context=".ui.reviewcreation.ReviewCreationFragment">
+        tools:context=".ui.accountpages.reviewcreation.ReviewCreationFragment">
 
         <TextView
             android:id="@+id/review_creation_title"
@@ -60,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/account_recycler"
             android:padding="16dp"
             android:text="Обслуживание • Персонал\n Качество установки"
@@ -127,10 +128,12 @@
             android:contentDescription="additionImg"
             android:nestedScrollingEnabled="false"
             android:padding="16dp"
+            android:layout_marginStart="16dp"
             android:src="@drawable/add_img"
-            app:layout_constraintTop_toBottomOf="@id/photo_scroll"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/add_img_creation_title"
+            app:layout_constraintStart_toEndOf="@id/add_img_creation_title"
+            app:layout_constraintTop_toTopOf="@+id/add_img_creation_title" />
 
         <LinearLayout
             android:background="@drawable/roundedcontainer"

@@ -70,7 +70,9 @@ class ConditionInfoImpl @Inject constructor() : ConditionInfo {
                     listOfConditions.add(Conditioner(linkArray, name, price, link))
                 }
 
-                emit(RequestResult.Success(CondTypeCard(title, listOfConditions)))
+                if (listOfConditions.isNotEmpty()) {
+                    emit(RequestResult.Success(CondTypeCard(title, listOfConditions)))
+                }
 
             }
         } catch (e: IOException){

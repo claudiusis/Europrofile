@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.europrofile.R
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentProfileBinding
@@ -29,6 +30,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        check()
+
         viewModel.userInfo.observe(viewLifecycleOwner){
 
             when (it) {
@@ -45,12 +48,10 @@ class ProfileFragment : Fragment() {
                     binding.profileInfo3.text = result.data.address
                     binding.profileInfo4.text = "⚫".repeat(result.data.password.length)
 
-
                     binding.iconText.setTextColor(resources.getColor(R.color.white))
-                    binding.iconText.text = if (it.data.name.split(" ").size==2)
+                    binding.iconText.text = if (it.data.name.split(" ").size == 2)
                         it.data.name[0].toString() + (it.data.name.split(" ")[1][0]).toString()
                     else it.data.name[0].toString()
-
 
                 }
                 is RequestResult.Error -> {
@@ -60,6 +61,28 @@ class ProfileFragment : Fragment() {
             }
 
         }
+
+
+        binding.profileRefactorLink.setOnClickListener {
+
+            findNavController().navigate(R.id.action_profileFragment_to_profileChangeFragment)
+
+        }
+
     }
+
+/*    fun check() {
+        val result = viewModel.userInfo.value as RequestResult.Success
+        result.let {
+            if (!result.data.imgUri!!.isEmpty()) {
+                binding.iconText.setTextColor(resources.getColor(R.color.white))
+                binding.iconText.text = if (result.data.name.split(" ").size == 2)
+                    result.data.name[0].toString() + (result.data.name.split(" ")[1][0]).toString()
+                else result.data.name[0].toString()
+            } else {
+                Glide.with(requireContext()).load(result.data.imgUri).into(binding.avatarIcon)
+            }
+        }
+    }*/
 
 }

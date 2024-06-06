@@ -13,7 +13,7 @@ import com.example.europrofile.R
 import com.example.europrofile.data.RequestResult
 import com.example.europrofile.databinding.FragmentMyCommentsBinding
 import com.example.europrofile.ui.accountpages.profile.ProfileViewModel
-import com.example.europrofile.ui.reviewcreation.ReviewViewModel
+import com.example.europrofile.ui.accountpages.reviewcreation.ReviewViewModel
 import com.example.europrofile.ui.tabs.comments.recycler.ReviewAdapter
 import com.example.europrofile.ui.tabs.comments.recycler.ViewReview
 import dagger.hilt.android.AndroidEntryPoint
@@ -72,7 +72,17 @@ class MyCommentsFragment : Fragment() {
 
         chatsViewModel.reviewGetState.observe(viewLifecycleOwner){
 
-            adapter.changeList(chatsViewModel.getUserReviews((user.userInfo.value as RequestResult.Success).data.id))
+            val myList = chatsViewModel.getUserReviews((user.userInfo.value as RequestResult.Success).data.id)
+
+            adapter.changeList(myList)
+
+            if (myList.isEmpty()){
+                binding.emptyImg.visibility = View.VISIBLE
+                binding.emptyText.visibility = View.VISIBLE
+            } else {
+                binding.emptyImg.visibility = View.GONE
+                binding.emptyText.visibility = View.GONE
+            }
 
         }
     }

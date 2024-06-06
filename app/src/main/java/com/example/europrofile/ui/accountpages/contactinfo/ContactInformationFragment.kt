@@ -1,9 +1,12 @@
 package com.example.europrofile.ui.accountpages.contactinfo
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.europrofile.R
 import com.example.europrofile.databinding.FragmentContactInformationBinding
@@ -53,6 +56,30 @@ class ContactInformationFragment : Fragment() {
             )
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val telnumbers = listOf(
+            binding.addressNumber1, binding.addressNumber2, binding.addressNumber3, binding.addressNumber4,
+            binding.addressNumber5, binding.addressNumber6
+        )
+
+        telnumbers.forEach {
+            it.setOnClickListener {
+                val toDial = "tel:" + (it as TextView).text
+                startActivity(Intent(Intent.ACTION_DIAL, Uri.parse(toDial)))
+            }
+        }
+
+        binding.link.setOnClickListener {
+
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(binding.link.text.toString())
+            startActivity(intent)
+
+        }
     }
 
     override fun onStart() {
